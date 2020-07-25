@@ -45,7 +45,7 @@ namespace SimpleSurvey
                 }
                 context.AddToSurveys(survey);
                 context.SaveChanges();
-
+                Response.Redirect("ListSurvey.aspx");
             }
         }
 

@@ -19,6 +19,10 @@ namespace SimpleSurvey
           
         }
 
+        protected void btnReturn_Menu(Object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx");
+        }
 
         DataTable GetData()
         {
@@ -29,10 +33,11 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Last Name"));
             dt.Columns.Add(new DataColumn("User Name"));
             dt.Columns.Add(new DataColumn("ID"));
+            dt.Columns.Add(new DataColumn("Class"));
 
             DataRow newRow;
 
-            foreach (User u in context.Users)
+            foreach (User u in context.Users.OrderBy(user => user.Class))
             {
                 if (u != null)
                 {
@@ -41,6 +46,10 @@ namespace SimpleSurvey
                     newRow[1] = u.LastName;
                     newRow[2] = u.UserName;
                     newRow[3] = u.ID;
+                    var classQuery = from c in context.Classes
+                                     where (c.ID == u.Class)
+                                     select c;
+                    newRow[4] = classQuery.First().ClassName;
                     dt.Rows.Add(newRow);
                 }
             }

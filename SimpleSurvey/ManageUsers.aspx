@@ -37,6 +37,16 @@
                 <td style="width: 25%; text-align: left;">
                     &nbsp;</td>
                 <td>
+                    <br />
+        <br />
+        <asp:Label ID="LClass" runat="server" Text="Class:"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+        <tr>
+                <td style="width: 25%; text-align: left;">
+                    <asp:DropDownList ID="ddlClasses" runat="server" Width="200px">
+        </asp:DropDownList>
+                    &nbsp;</td>
+                <td>
                     <br /><br />
                     <asp:Button ID="btnSubmit" runat="server" Enabled="True" 
                         onclick="btnSubmit_Click" Text="Submit" />

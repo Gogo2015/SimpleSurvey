@@ -70,7 +70,7 @@
                                 onclick="btnRemoveAll_Click" Text="&lt;&lt;" />
                         </td>
                         <td class="style2">
-                            <asp:ListBox ID="lbTarget" runat="server" Rows="6" Width="100%"></asp:ListBox>
+                            <asp:ListBox ID="lbTarget" runat="server" Rows="6" Width="150%"></asp:ListBox>
                         </td>
                     </tr>
                 </table>
@@ -82,8 +82,10 @@
             <td>
                 <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
                     Text="Submit" />
-                <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
+                <asp:Button ID="btnCancel" runat="server" CausesValidation="False" onclick="btnSubmit_Click"
                     Text="Cancel" />
+                <asp:Button ID="btnDelete" runat="server" OnClick="btn_Delete" Text="Delete" />
+                <br />
             </td>
         </tr>
         <tr>
@@ -93,6 +95,7 @@
                 &nbsp;</td>
         </tr>
     </table>
+        <asp:Label ID="txtErrorMessage" runat="server" ForeColor="#993333" Width="300px"></asp:Label>
         </form>
 </body>
 </html>

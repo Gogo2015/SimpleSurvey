@@ -15,12 +15,17 @@ namespace SimpleSurvey
         public int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtPassword.Attributes["type"] = "password";
             // get the user id
             id = Int32.Parse(Request.QueryString["ID"]);
+            
             if (!Page.IsPostBack)
             {
-                
-               
+                foreach (Class c in context.Classes)
+                {
+                    ddlClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
+                }
+
 
                 var query = from u in context.Users
                             where (u.ID == id)
@@ -32,6 +37,13 @@ namespace SimpleSurvey
                 txtLastName.Text = user.LastName;
                 txtUserName.Text = user.UserName;
                 txtPassword.Text = user.Password;
+                ddlClasses.SelectedValue = user.Class.ToString();
+                /*
+                var classQuery = from c in context.Classes
+                            where (c.ID == user.Class)
+                            select c;
+                ddlClasses.SelectedValue = classQuery.First().ClassName;
+                */
 
             }
         }
@@ -50,7 +62,7 @@ namespace SimpleSurvey
             user.LastName = txtLastName.Text;
             user.UserName = txtUserName.Text;
             user.Password = txtPassword.Text;
-            
+            user.Class = Int32.Parse(ddlClasses.SelectedValue);
             context.SaveChanges();
             Response.Redirect("ListUsers.aspx");
            
@@ -72,6 +84,11 @@ namespace SimpleSurvey
             context.Users.DeleteObject(user);
             context.SaveChanges();
             Response.Redirect("ListUsers.aspx");
+        }
+
+        protected void BtnReset(Object sender, EventArgs e)
+        {
+            txtPassword.Text = "test";
         }
     }
 }

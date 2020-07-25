@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="SimpleSurvey.ListUsers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SurveyResponses.aspx.cs" Inherits="SimpleSurvey.SurveyResponses" %>
 
 <!DOCTYPE html>
 
@@ -8,16 +8,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="text-align: right;">
-            <asp:Button ID="Button1" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
-        </div>
         
-        <asp:GridView ID="UserView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">
+        <asp:GridView ID="SurveyResponseView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">
             <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
              <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditUser.aspx?ID={0}" DataTextField="ID" />
+                <asp:HyperLinkField DataNavigateUrlFields="SurveyID, FilledBy" HeaderText="ID" DataNavigateUrlFormatString="ViewSurveyResponse.aspx?surveyID={0}&filledBy={1}" DataTextField="ID" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="First Name" DataField="First Name" />
@@ -31,6 +28,9 @@
             <Columns>
                 <asp:BoundField HeaderText ="Class" DataField="Class" />
             </Columns>
+            <Columns>
+                <asp:BoundField HeaderText ="Completion Status" DataField="FilledSurvey" />
+            </Columns>
             <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
             <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
             <SortedAscendingCellStyle BackColor="#FFF1D4" />
@@ -39,10 +39,7 @@
             <SortedDescendingHeaderStyle BackColor="#93451F" />
         </asp:GridView>
 
-        <br />
-        <br />
-        <asp:Button ID="btnAddUser" runat="server" Text="Add Users" OnClick ="btn_AddUser" />
-
     </form>
+
 </body>
 </html>

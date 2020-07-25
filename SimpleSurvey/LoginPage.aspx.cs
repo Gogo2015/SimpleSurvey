@@ -24,20 +24,26 @@ namespace SimpleSurvey
                 
                 user.UserName = txtUserName.Text;
                 user.Password = txtPassword.Text;
-
-                if (LoadUsers())
+                user = new User();
+                user = LoadUsers();
+                if (user != null)
                 {
-                    txtUserName.Text = "User Found, Sucessful Login";
-                    Response.Redirect("Menu.aspx");
-                }
+                    txtUserName.Text = "Sucessful Login";
+
+                    if (user.Role != 1) //if student
+                        Response.Redirect("SurveyForm.aspx?id=" + user.ID);
+                    
+                    else //if admin
+                        Response.Redirect("Menu.aspx");
+                } 
                 else
                 {
-                    txtUserName.Text = "User Not Found, Failed Login";
+                    txtUserName.Text = "Failed Login";
                 }
 
             }
         }
-        private Boolean LoadUsers()
+        private User LoadUsers()
         {
             
             var query = from u in context.Users
@@ -45,9 +51,9 @@ namespace SimpleSurvey
                         select u;
             if (query.Count() != 0)
             {
-                return true;
+                return query.First(); 
             }
-            return false;
+            return null;
         }
     }
 }

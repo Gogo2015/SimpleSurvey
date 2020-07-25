@@ -32,11 +32,21 @@
         <br />
         <asp:Label ID="LPassword" runat="server" Text="Password:"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="txtPassword" runat="server" MaxLength="200" Width="200px" EnableViewState="False" TextMode="Password"></asp:TextBox>
+        <asp:TextBox ID="txtPassword" runat="server" MaxLength="200" Width="200px"></asp:TextBox>
         <tr>
                 <td style="width: 25%; text-align: left;">
                     &nbsp;</td>
                 <td>
+                    <br />
+        <br />
+        <asp:Label ID="LClass" runat="server" Text="Class:"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+        <tr>
+                <td style="width: 25%; text-align: left;">
+                    &nbsp;</td>
+                <td>
+                    <asp:DropDownList ID="ddlClasses" runat="server" Width="200px">
+        </asp:DropDownList>
                     <br /><br />
                     <asp:Button ID="btnSubmit" runat="server" Enabled="True" 
                         onclick="btnSubmit_Click" Text="Save" />
@@ -46,6 +56,8 @@
             </tr>
 
     &nbsp;<asp:Button ID="btnDelete" runat="server" Text="Delete" Onclick ="btnDelete_Click" />
+
+    &nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset Password" OnClick ="BtnReset" />
 
     </form>
 

@@ -19,13 +19,14 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Users_Roles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Role), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.User), true)]
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Surveys_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.User), "Surveys", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey), true)]
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Survey_Response_Questions", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Question), "Survey_Response", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey_Response), true)]
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_SurveyQuestions_Questions", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Question), "SurveyQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.SurveyQuestion), true)]
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Survey_Response_Surveys", "Survey", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Survey), "Survey_Response", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey_Response), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Users_Classes", "Class", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Class), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.User), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Survey_Questions_Questions", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Question), "SurveyQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.SurveyQuestion), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_SurveyResponse_Questions", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Question), "Survey_Response", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey_Response), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Users_Roles", "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Role), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.User), true)]
 [assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Survey_Response_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.User), "Survey_Response", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey_Response), true)]
-[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_SurveyQuestions_Surveys", "Survey", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Survey), "SurveyQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.SurveyQuestion), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_SurveyResponse_Surveys", "Survey", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Survey), "Survey_Response", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey_Response), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Survey_Questions_Surveys", "Survey", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.Survey), "SurveyQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.SurveyQuestion), true)]
+[assembly: EdmRelationshipAttribute("SurveyAppModel", "FK_Surveys_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SimpleSurvey.User), "Survey", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SimpleSurvey.Survey), true)]
 
 #endregion
 
@@ -80,6 +81,22 @@ namespace SimpleSurvey
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Class> Classes
+        {
+            get
+            {
+                if ((_Classes == null))
+                {
+                    _Classes = base.CreateObjectSet<Class>("Classes");
+                }
+                return _Classes;
+            }
+        }
+        private ObjectSet<Class> _Classes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Question> Questions
         {
             get
@@ -108,6 +125,38 @@ namespace SimpleSurvey
             }
         }
         private ObjectSet<Role> _Roles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Survey_Response> Survey_Response
+        {
+            get
+            {
+                if ((_Survey_Response == null))
+                {
+                    _Survey_Response = base.CreateObjectSet<Survey_Response>("Survey_Response");
+                }
+                return _Survey_Response;
+            }
+        }
+        private ObjectSet<Survey_Response> _Survey_Response;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SurveyQuestion> SurveyQuestions
+        {
+            get
+            {
+                if ((_SurveyQuestions == null))
+                {
+                    _SurveyQuestions = base.CreateObjectSet<SurveyQuestion>("SurveyQuestions");
+                }
+                return _SurveyQuestions;
+            }
+        }
+        private ObjectSet<SurveyQuestion> _SurveyQuestions;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -160,38 +209,46 @@ namespace SimpleSurvey
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Survey_Response> Survey_Response
+        public ObjectSet<SurveyResponseDetailedView> SurveyResponseDetailedViews
         {
             get
             {
-                if ((_Survey_Response == null))
+                if ((_SurveyResponseDetailedViews == null))
                 {
-                    _Survey_Response = base.CreateObjectSet<Survey_Response>("Survey_Response");
+                    _SurveyResponseDetailedViews = base.CreateObjectSet<SurveyResponseDetailedView>("SurveyResponseDetailedViews");
                 }
-                return _Survey_Response;
+                return _SurveyResponseDetailedViews;
             }
         }
-        private ObjectSet<Survey_Response> _Survey_Response;
+        private ObjectSet<SurveyResponseDetailedView> _SurveyResponseDetailedViews;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SurveyQuestion> SurveyQuestions
+        public ObjectSet<SurveyResponseView> SurveyResponseViews
         {
             get
             {
-                if ((_SurveyQuestions == null))
+                if ((_SurveyResponseViews == null))
                 {
-                    _SurveyQuestions = base.CreateObjectSet<SurveyQuestion>("SurveyQuestions");
+                    _SurveyResponseViews = base.CreateObjectSet<SurveyResponseView>("SurveyResponseViews");
                 }
-                return _SurveyQuestions;
+                return _SurveyResponseViews;
             }
         }
-        private ObjectSet<SurveyQuestion> _SurveyQuestions;
+        private ObjectSet<SurveyResponseView> _SurveyResponseViews;
 
         #endregion
 
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Classes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToClasses(Class @class)
+        {
+            base.AddObject("Classes", @class);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Questions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -207,6 +264,22 @@ namespace SimpleSurvey
         public void AddToRoles(Role role)
         {
             base.AddObject("Roles", role);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Survey_Response EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSurvey_Response(Survey_Response survey_Response)
+        {
+            base.AddObject("Survey_Response", survey_Response);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SurveyQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSurveyQuestions(SurveyQuestion surveyQuestion)
+        {
+            base.AddObject("SurveyQuestions", surveyQuestion);
         }
     
         /// <summary>
@@ -234,19 +307,19 @@ namespace SimpleSurvey
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Survey_Response EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the SurveyResponseDetailedViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSurvey_Response(Survey_Response survey_Response)
+        public void AddToSurveyResponseDetailedViews(SurveyResponseDetailedView surveyResponseDetailedView)
         {
-            base.AddObject("Survey_Response", survey_Response);
+            base.AddObject("SurveyResponseDetailedViews", surveyResponseDetailedView);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SurveyQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the SurveyResponseViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSurveyQuestions(SurveyQuestion surveyQuestion)
+        public void AddToSurveyResponseViews(SurveyResponseView surveyResponseView)
         {
-            base.AddObject("SurveyQuestions", surveyQuestion);
+            base.AddObject("SurveyResponseViews", surveyResponseView);
         }
 
         #endregion
@@ -256,6 +329,141 @@ namespace SimpleSurvey
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SurveyAppModel", Name="Class")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Class : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Class object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="className">Initial value of the ClassName property.</param>
+        /// <param name="registrationCode">Initial value of the RegistrationCode property.</param>
+        public static Class CreateClass(global::System.Int32 id, global::System.String className, global::System.String registrationCode)
+        {
+            Class @class = new Class();
+            @class.ID = id;
+            @class.ClassName = className;
+            @class.RegistrationCode = registrationCode;
+            return @class;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ClassName
+        {
+            get
+            {
+                return _ClassName;
+            }
+            set
+            {
+                OnClassNameChanging(value);
+                ReportPropertyChanging("ClassName");
+                _ClassName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ClassName");
+                OnClassNameChanged();
+            }
+        }
+        private global::System.String _ClassName;
+        partial void OnClassNameChanging(global::System.String value);
+        partial void OnClassNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RegistrationCode
+        {
+            get
+            {
+                return _RegistrationCode;
+            }
+            set
+            {
+                OnRegistrationCodeChanging(value);
+                ReportPropertyChanging("RegistrationCode");
+                _RegistrationCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("RegistrationCode");
+                OnRegistrationCodeChanged();
+            }
+        }
+        private global::System.String _RegistrationCode;
+        partial void OnRegistrationCodeChanging(global::System.String value);
+        partial void OnRegistrationCodeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Classes", "User")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SurveyAppModel.FK_Users_Classes", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SurveyAppModel.FK_Users_Classes", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -398,18 +606,18 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Response_Questions", "Survey_Response")]
-        public EntityCollection<Survey_Response> Survey_Response
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Questions_Questions", "SurveyQuestion")]
+        public EntityCollection<SurveyQuestion> SurveyQuestions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey_Response>("SurveyAppModel.FK_Survey_Response_Questions", "Survey_Response");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_Survey_Questions_Questions", "SurveyQuestion");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey_Response>("SurveyAppModel.FK_Survey_Response_Questions", "Survey_Response", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_Survey_Questions_Questions", "SurveyQuestion", value);
                 }
             }
         }
@@ -420,18 +628,18 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyQuestions_Questions", "SurveyQuestion")]
-        public EntityCollection<SurveyQuestion> SurveyQuestions
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyResponse_Questions", "Survey_Response")]
+        public EntityCollection<Survey_Response> Survey_Response
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_SurveyQuestions_Questions", "SurveyQuestion");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey_Response>("SurveyAppModel.FK_SurveyResponse_Questions", "Survey_Response");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_SurveyQuestions_Questions", "SurveyQuestion", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey_Response>("SurveyAppModel.FK_SurveyResponse_Questions", "Survey_Response", value);
                 }
             }
         }
@@ -529,18 +737,18 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Roles", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Roles", "User")]
         public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SurveyAppModel.FK_Users_Roles", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SurveyAppModel.FK_Users_Roles", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SurveyAppModel.FK_Users_Roles", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SurveyAppModel.FK_Users_Roles", "User", value);
                 }
             }
         }
@@ -764,16 +972,60 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Surveys_Users", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyResponse_Surveys", "Survey_Response")]
+        public EntityCollection<Survey_Response> Survey_Response
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey_Response>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey_Response");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey_Response>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey_Response", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Questions_Surveys", "SurveyQuestion")]
+        public EntityCollection<SurveyQuestion> SurveyQuestions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_Survey_Questions_Surveys", "SurveyQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_Survey_Questions_Surveys", "SurveyQuestion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Surveys_Users", "User")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "User").Value = value;
             }
         }
         /// <summary>
@@ -785,57 +1037,13 @@ namespace SimpleSurvey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "Users", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Response_Surveys", "Survey_Response")]
-        public EntityCollection<Survey_Response> Survey_Response
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey_Response>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey_Response");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey_Response>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey_Response", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyQuestions_Surveys", "SurveyQuestion")]
-        public EntityCollection<SurveyQuestion> SurveyQuestions
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_SurveyQuestions_Surveys", "SurveyQuestion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyQuestion>("SurveyAppModel.FK_SurveyQuestions_Surveys", "SurveyQuestion", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SurveyAppModel.FK_Surveys_Users", "User", value);
                 }
             }
         }
@@ -1011,16 +1219,16 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Response_Questions", "Question")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyResponse_Questions", "Question")]
         public Question Question
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Response_Questions", "Question").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyResponse_Questions", "Question").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Response_Questions", "Question").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyResponse_Questions", "Question").Value = value;
             }
         }
         /// <summary>
@@ -1032,51 +1240,13 @@ namespace SimpleSurvey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Response_Questions", "Question");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyResponse_Questions", "Question");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("SurveyAppModel.FK_Survey_Response_Questions", "Question", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Response_Surveys", "Survey")]
-        public Survey Survey
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Survey> SurveyReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Survey>("SurveyAppModel.FK_Survey_Response_Surveys", "Survey", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("SurveyAppModel.FK_SurveyResponse_Questions", "Question", value);
                 }
             }
         }
@@ -1115,6 +1285,44 @@ namespace SimpleSurvey
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SurveyAppModel.FK_Survey_Response_Users", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyResponse_Surveys", "Survey")]
+        public Survey Survey
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Survey> SurveyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Survey>("SurveyAppModel.FK_SurveyResponse_Surveys", "Survey", value);
                 }
             }
         }
@@ -1232,24 +1440,24 @@ namespace SimpleSurvey
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> OrderID
+        public Nullable<global::System.Int32> OrderId
         {
             get
             {
-                return _OrderID;
+                return _OrderId;
             }
             set
             {
-                OnOrderIDChanging(value);
-                ReportPropertyChanging("OrderID");
-                _OrderID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("OrderID");
-                OnOrderIDChanged();
+                OnOrderIdChanging(value);
+                ReportPropertyChanging("OrderId");
+                _OrderId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderId");
+                OnOrderIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _OrderID;
-        partial void OnOrderIDChanging(Nullable<global::System.Int32> value);
-        partial void OnOrderIDChanged();
+        private Nullable<global::System.Int32> _OrderId;
+        partial void OnOrderIdChanging(Nullable<global::System.Int32> value);
+        partial void OnOrderIdChanged();
 
         #endregion
 
@@ -1262,16 +1470,16 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyQuestions_Questions", "Question")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Questions_Questions", "Question")]
         public Question Question
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyQuestions_Questions", "Question").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Questions_Questions", "Question").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyQuestions_Questions", "Question").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Questions_Questions", "Question").Value = value;
             }
         }
         /// <summary>
@@ -1283,13 +1491,13 @@ namespace SimpleSurvey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_SurveyQuestions_Questions", "Question");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Question>("SurveyAppModel.FK_Survey_Questions_Questions", "Question");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("SurveyAppModel.FK_SurveyQuestions_Questions", "Question", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Question>("SurveyAppModel.FK_Survey_Questions_Questions", "Question", value);
                 }
             }
         }
@@ -1300,16 +1508,16 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_SurveyQuestions_Surveys", "Survey")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Survey_Questions_Surveys", "Survey")]
         public Survey Survey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyQuestions_Surveys", "Survey").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Questions_Surveys", "Survey").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyQuestions_Surveys", "Survey").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Questions_Surveys", "Survey").Value = value;
             }
         }
         /// <summary>
@@ -1321,19 +1529,442 @@ namespace SimpleSurvey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_SurveyQuestions_Surveys", "Survey");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Survey>("SurveyAppModel.FK_Survey_Questions_Surveys", "Survey");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Survey>("SurveyAppModel.FK_SurveyQuestions_Surveys", "Survey", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Survey>("SurveyAppModel.FK_Survey_Questions_Surveys", "Survey", value);
                 }
             }
         }
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SurveyAppModel", Name="SurveyResponseDetailedView")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SurveyResponseDetailedView : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SurveyResponseDetailedView object.
+        /// </summary>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="questionType">Initial value of the QuestionType property.</param>
+        /// <param name="surveyID">Initial value of the SurveyID property.</param>
+        /// <param name="response">Initial value of the Response property.</param>
+        /// <param name="filledBy">Initial value of the FilledBy property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static SurveyResponseDetailedView CreateSurveyResponseDetailedView(global::System.String text, global::System.String questionType, global::System.Int32 surveyID, global::System.String response, global::System.Int32 filledBy, global::System.Int32 id)
+        {
+            SurveyResponseDetailedView surveyResponseDetailedView = new SurveyResponseDetailedView();
+            surveyResponseDetailedView.Text = text;
+            surveyResponseDetailedView.QuestionType = questionType;
+            surveyResponseDetailedView.SurveyID = surveyID;
+            surveyResponseDetailedView.Response = response;
+            surveyResponseDetailedView.FilledBy = filledBy;
+            surveyResponseDetailedView.ID = id;
+            return surveyResponseDetailedView;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                if (_Text != value)
+                {
+                    OnTextChanging(value);
+                    ReportPropertyChanging("Text");
+                    _Text = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Text");
+                    OnTextChanged();
+                }
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String QuestionType
+        {
+            get
+            {
+                return _QuestionType;
+            }
+            set
+            {
+                if (_QuestionType != value)
+                {
+                    OnQuestionTypeChanging(value);
+                    ReportPropertyChanging("QuestionType");
+                    _QuestionType = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("QuestionType");
+                    OnQuestionTypeChanged();
+                }
+            }
+        }
+        private global::System.String _QuestionType;
+        partial void OnQuestionTypeChanging(global::System.String value);
+        partial void OnQuestionTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SurveyID
+        {
+            get
+            {
+                return _SurveyID;
+            }
+            set
+            {
+                if (_SurveyID != value)
+                {
+                    OnSurveyIDChanging(value);
+                    ReportPropertyChanging("SurveyID");
+                    _SurveyID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SurveyID");
+                    OnSurveyIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SurveyID;
+        partial void OnSurveyIDChanging(global::System.Int32 value);
+        partial void OnSurveyIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Response
+        {
+            get
+            {
+                return _Response;
+            }
+            set
+            {
+                if (_Response != value)
+                {
+                    OnResponseChanging(value);
+                    ReportPropertyChanging("Response");
+                    _Response = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Response");
+                    OnResponseChanged();
+                }
+            }
+        }
+        private global::System.String _Response;
+        partial void OnResponseChanging(global::System.String value);
+        partial void OnResponseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FilledBy
+        {
+            get
+            {
+                return _FilledBy;
+            }
+            set
+            {
+                if (_FilledBy != value)
+                {
+                    OnFilledByChanging(value);
+                    ReportPropertyChanging("FilledBy");
+                    _FilledBy = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FilledBy");
+                    OnFilledByChanged();
+                }
+            }
+        }
+        private global::System.Int32 _FilledBy;
+        partial void OnFilledByChanging(global::System.Int32 value);
+        partial void OnFilledByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SurveyAppModel", Name="SurveyResponseView")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SurveyResponseView : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SurveyResponseView object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="surveyID">Initial value of the SurveyID property.</param>
+        /// <param name="filledBy">Initial value of the FilledBy property.</param>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        public static SurveyResponseView CreateSurveyResponseView(global::System.Int32 id, global::System.Int32 surveyID, global::System.Int32 filledBy, global::System.String firstName, global::System.String userName)
+        {
+            SurveyResponseView surveyResponseView = new SurveyResponseView();
+            surveyResponseView.ID = id;
+            surveyResponseView.SurveyID = surveyID;
+            surveyResponseView.FilledBy = filledBy;
+            surveyResponseView.FirstName = firstName;
+            surveyResponseView.UserName = userName;
+            return surveyResponseView;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SurveyID
+        {
+            get
+            {
+                return _SurveyID;
+            }
+            set
+            {
+                if (_SurveyID != value)
+                {
+                    OnSurveyIDChanging(value);
+                    ReportPropertyChanging("SurveyID");
+                    _SurveyID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SurveyID");
+                    OnSurveyIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SurveyID;
+        partial void OnSurveyIDChanging(global::System.Int32 value);
+        partial void OnSurveyIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FilledBy
+        {
+            get
+            {
+                return _FilledBy;
+            }
+            set
+            {
+                if (_FilledBy != value)
+                {
+                    OnFilledByChanging(value);
+                    ReportPropertyChanging("FilledBy");
+                    _FilledBy = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FilledBy");
+                    OnFilledByChanged();
+                }
+            }
+        }
+        private global::System.Int32 _FilledBy;
+        partial void OnFilledByChanging(global::System.Int32 value);
+        partial void OnFilledByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                if (_FirstName != value)
+                {
+                    OnFirstNameChanging(value);
+                    ReportPropertyChanging("FirstName");
+                    _FirstName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("FirstName");
+                    OnFirstNameChanged();
+                }
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                if (_UserName != value)
+                {
+                    OnUserNameChanging(value);
+                    ReportPropertyChanging("UserName");
+                    _UserName = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("UserName");
+                    OnUserNameChanged();
+                }
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Class
+        {
+            get
+            {
+                return _Class;
+            }
+            set
+            {
+                OnClassChanging(value);
+                ReportPropertyChanging("Class");
+                _Class = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Class");
+                OnClassChanged();
+            }
+        }
+        private global::System.String _Class;
+        partial void OnClassChanging(global::System.String value);
+        partial void OnClassChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>
@@ -1511,7 +2142,8 @@ namespace SimpleSurvey
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="password">Initial value of the Password property.</param>
         /// <param name="role">Initial value of the Role property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String firstName, global::System.String userName, global::System.String password, global::System.Int32 role)
+        /// <param name="class">Initial value of the Class property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String firstName, global::System.String userName, global::System.String password, global::System.Int32 role, global::System.Int32 @class)
         {
             User user = new User();
             user.ID = id;
@@ -1519,6 +2151,7 @@ namespace SimpleSurvey
             user.UserName = userName;
             user.Password = password;
             user.Role = role;
+            user.Class = @class;
             return user;
         }
 
@@ -1672,6 +2305,30 @@ namespace SimpleSurvey
         private global::System.Int32 _Role;
         partial void OnRoleChanging(global::System.Int32 value);
         partial void OnRoleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Class
+        {
+            get
+            {
+                return _Class;
+            }
+            set
+            {
+                OnClassChanging(value);
+                ReportPropertyChanging("Class");
+                _Class = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Class");
+                OnClassChanged();
+            }
+        }
+        private global::System.Int32 _Class;
+        partial void OnClassChanging(global::System.Int32 value);
+        partial void OnClassChanged();
 
         #endregion
 
@@ -1684,16 +2341,54 @@ namespace SimpleSurvey
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Roles", "Roles")]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Classes", "Class")]
+        public Class Class1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Class>("SurveyAppModel.FK_Users_Classes", "Class").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Class>("SurveyAppModel.FK_Users_Classes", "Class").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Class> Class1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Class>("SurveyAppModel.FK_Users_Classes", "Class");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Class>("SurveyAppModel.FK_Users_Classes", "Class", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Users_Roles", "Role")]
         public Role Role1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Roles").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Role").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Roles").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Role").Value = value;
             }
         }
         /// <summary>
@@ -1705,35 +2400,13 @@ namespace SimpleSurvey
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Roles");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Role");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Roles", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Surveys_Users", "Surveys")]
-        public EntityCollection<Survey> Surveys
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey>("SurveyAppModel.FK_Surveys_Users", "Surveys");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey>("SurveyAppModel.FK_Surveys_Users", "Surveys", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("SurveyAppModel.FK_Users_Roles", "Role", value);
                 }
             }
         }
@@ -1756,6 +2429,28 @@ namespace SimpleSurvey
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey_Response>("SurveyAppModel.FK_Survey_Response_Users", "Survey_Response", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SurveyAppModel", "FK_Surveys_Users", "Survey")]
+        public EntityCollection<Survey> Surveys
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Survey>("SurveyAppModel.FK_Surveys_Users", "Survey");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Survey>("SurveyAppModel.FK_Surveys_Users", "Survey", value);
                 }
             }
         }

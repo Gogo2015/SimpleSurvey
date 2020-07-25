@@ -22,7 +22,7 @@ namespace SimpleSurvey
                 switch (val)
                 {
                     case "Manage Surveys":
-                        Response.Redirect("ManageSurveys.aspx");
+                        Response.Redirect("ListSurvey.aspx");
                         break;
                     case "Manage Questions":
                         Response.Redirect("ListQuestions.aspx");
@@ -32,6 +32,9 @@ namespace SimpleSurvey
                         break;
                     case "Take Survey":
                         Response.Redirect("SurveyForm.aspx");
+                        break;
+                    case "Survey Responses":
+                        Response.Redirect("MenuSurveys.aspx");
                         break;
                     default:
                         break;

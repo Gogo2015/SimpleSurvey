@@ -17,7 +17,7 @@ namespace SimpleSurvey
             if (!IsPostBack)
                 LoadSurveys();
             btnSubmit.Enabled = false;
-            if (ddlSurveys.SelectedIndex > 0)
+            if (ddlSurveys.SelectedIndex >= 0)
             {
                 surveyid = int.Parse(ddlSurveys.SelectedValue);
                 PopulateSurvey();
@@ -51,6 +51,7 @@ namespace SimpleSurvey
             TextBox txt;
             CheckBox cbk;
             DropDownList ddl;
+            RadioButtonList rbl;
 
             foreach (Question q in questions)
             {
@@ -92,6 +93,20 @@ namespace SimpleSurvey
                     }
                     tc.Controls.Add(ddl);
                 }
+
+                if (q.QuestionType.ToLower() == "yesorno")
+                {
+                    rbl = new RadioButtonList();
+                    rbl.ID = "rbl_" + q.ID;
+                    rbl.Width = Unit.Percentage(41);
+                    if (!string.IsNullOrEmpty(q.Options))
+                    {
+                        string[] values = q.Options.Split(',');
+                        foreach (string v in values)
+                            rbl.Items.Add(v.Trim());
+                    }
+                    tc.Controls.Add(rbl);
+                }
                 tc.Width = Unit.Percentage(80);
                 tr.Cells.Add(tc);
                 tbl.Rows.Add(tr);
@@ -118,7 +133,7 @@ namespace SimpleSurvey
                     foreach (TableRow tr in tbl.Rows)
                     {
                         Survey_Response sres = new Survey_Response();
-                        sres.FilledBy = 2;
+                        sres.FilledBy = Int32.Parse(Request.QueryString["id"]);
                         sres.SurveyID = surveyid;
                         sres.QuestionID = Convert.ToInt32(tr.Cells[0].Attributes["ID"]);
                         TableCell tc = tr.Cells[1];
@@ -135,6 +150,9 @@ namespace SimpleSurvey
                             else if (ctrc is CheckBox)
                             {
                                 sres.Response = (ctrc as CheckBox).Checked.ToString();
+                            } else if (ctrc is RadioButtonList)
+                            {
+                                sres.Response = (ctrc as RadioButtonList).SelectedValue;
                             }
                         }
                         response.Add(sres);

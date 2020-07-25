@@ -1,101 +1,83 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditQuestions.aspx.cs" Inherits="SimpleSurvey.EditQuestions" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .auto-style1 {
+            width: 25%;
+            height: 25px;
+        }
+        .auto-style2 {
+            height: 25px;
+        }
+        .auto-style3 {
+            width: 25%;
+            height: 31px;
+        }
+        .auto-style4 {
+            height: 31px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="text-align: right;">
-        <asp:Button ID="Button1" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
-    </div>
-    <table cellpadding="2" class="style1">
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                Title</td>
-            <td>
-                <asp:TextBox ID="txtTitle" runat="server" Width="40%"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                Description</td>
-            <td>
-                <asp:TextBox ID="txtDesc" runat="server" Width="40%"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                Expires On</td>
-            <td>
-                <asp:TextBox ID="txtDate" runat="server" Width="40%"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                Select Questions</td>
-            <td>
-                <table cellpadding="2" class="style1">
-                    <tr>
-                        <td style="width: 40%;">
-                            Source</td>
-                        <td style="width: 20%;">
-                            &nbsp;</td>
-                        <td style="width: 40%;">
-                            Target</td>
-                    </tr>
-                    <tr>
-                        <td class="style2">
-                            <asp:ListBox ID="lbSource" runat="server" Rows="6" Width="100%"></asp:ListBox>
-                        </td>
-                        <td class="style3" style="text-align: center;">
-                            <asp:Button ID="btnAddAll" runat="server" CausesValidation="False" 
-                                onclick="btnAddAll_Click" Text="&gt;&gt;" />
-                            <br />
-                            <asp:Button ID="btnAddOne" runat="server" CausesValidation="False" 
-                                onclick="btnAddOne_Click" Text=" &gt; " />
-                            <br />
-                            <asp:Button ID="btnRemoveOne" runat="server" CausesValidation="False" 
-                                onclick="btnRemoveOne_Click" Text=" &lt; " />
-                            <br />
-                            <asp:Button ID="btnRemoveAll" runat="server" CausesValidation="False" 
-                                onclick="btnRemoveAll_Click" Text="&lt;&lt;" />
-                        </td>
-                        <td class="style2">
-                            <asp:ListBox ID="lbTarget" runat="server" Rows="6" Width="100%"></asp:ListBox>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
-            <td>
-                <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
-                    Text="Submit" />
-                <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
-                    Text="Cancel" />
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-        </tr>
-    </table>
     <div>
     
+        <table cellpadding="2" class="style1">
+            <tr>
+                <td style="text-align: left;" class="auto-style1">
+                    </td>
+                <td class="auto-style2">
+                    <div style="text-align: right;">
+                        <asp:Button ID="Button1" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%; text-align: left;">
+                    Question Type</td>
+                <td>
+                    <asp:DropDownList ID="ddlTypes" runat="server" Width="41%">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%; text-align: left;">
+                    Title</td>
+                <td>
+                    <asp:TextBox ID="txtTitle" runat="server" Width="40%"></asp:TextBox>
+                </td>
+            </tr>
+           
+            <tr>
+                <td style="width: 25%; text-align: left;">
+                    Values</td>
+                <td>
+                    <asp:TextBox ID="txtValues" runat="server" Rows="3" TextMode="MultiLine" 
+                        Width="40%"></asp:TextBox>
+                    (Enter values as comma seperated)</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;" class="auto-style3">
+                    &nbsp;</td>
+                <td class="auto-style4">
+                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" 
+                        onclick="btnSubmit_Click" />
+                    <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
+                        Text="Cancel" />
+                </td>
+            </tr>
+        </table>
+    
     </div>
+        <asp:Label ID="txtErrorMessage" runat="server" Width="200px" ForeColor="#993333"></asp:Label>
     </form>
 </body>
 </html>

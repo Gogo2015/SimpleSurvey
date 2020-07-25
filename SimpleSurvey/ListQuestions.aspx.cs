@@ -18,6 +18,11 @@ namespace SimpleSurvey
 
         }
 
+        protected void btnReturn_Menu(Object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx");
+        }
+
 
         DataTable GetData()
         {
