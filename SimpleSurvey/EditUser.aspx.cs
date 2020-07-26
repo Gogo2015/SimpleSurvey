@@ -21,10 +21,14 @@ namespace SimpleSurvey
             
             if (!Page.IsPostBack)
             {
-                foreach (Class c in context.Classes)
+                var queryclass = from Class cl in context.Classes
+                                 where (cl.CreatedBy == id)
+                                 select cl;
+                foreach (Class c in queryclass.ToList())
                 {
                     ddlClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
                 }
+
 
 
                 var query = from u in context.Users
@@ -37,13 +41,21 @@ namespace SimpleSurvey
                 txtLastName.Text = user.LastName;
                 txtUserName.Text = user.UserName;
                 txtPassword.Text = user.Password;
-                ddlClasses.SelectedValue = user.Class.ToString();
-                /*
-                var classQuery = from c in context.Classes
-                            where (c.ID == user.Class)
-                            select c;
-                ddlClasses.SelectedValue = classQuery.First().ClassName;
-                */
+                var queryUser = from UserClass cl in context.UserClasses
+                                 where (cl.UserID==user.ID)
+                                 select cl;
+                foreach (UserClass uc in queryUser.ToList())
+                {
+                    var querycl = from Class c in context.Classes
+                                  where (c.ID == uc.ClassID)
+                                  select c;
+                    if (querycl.Count() != 0)
+                    {
+                        ddlClasses.SelectedValue = querycl.First().ClassName;
+                    }
+                }
+                
+                
 
             }
         }
@@ -62,7 +74,9 @@ namespace SimpleSurvey
             user.LastName = txtLastName.Text;
             user.UserName = txtUserName.Text;
             user.Password = txtPassword.Text;
-            user.Class = Int32.Parse(ddlClasses.SelectedValue);
+            var uc = from UserClass c in context.UserClasses
+                     where (c.ClassID ==)
+            uc.ClassID = Int32.Parse(ddlClasses.SelectedItem.Value);
             context.SaveChanges();
             Response.Redirect("ListUsers.aspx");
            

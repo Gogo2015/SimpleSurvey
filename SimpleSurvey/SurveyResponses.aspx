@@ -26,9 +26,6 @@
                 <asp:BoundField HeaderText="User Name" DataField="User Name" />
             </Columns>
             <Columns>
-                <asp:BoundField HeaderText ="Class" DataField="Class" />
-            </Columns>
-            <Columns>
                 <asp:BoundField HeaderText ="Completion Status" DataField="FilledSurvey" />
             </Columns>
             <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />

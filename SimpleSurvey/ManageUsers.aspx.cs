@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace SimpleSurvey
 {
+    
     public partial class ManageUsers : System.Web.UI.Page
     {
         SurveyAppConString context;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             context = new SurveyAppConString();
-            foreach (Class c in context.Classes)
+            var queryclass = from Class cl in context.Classes
+                             where (cl.CreatedBy == id)
+                             select cl;
+            foreach (Class c in queryclass.ToList())
             {
-                ddlClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
+                ListClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
             }
         }
 
@@ -29,10 +36,21 @@ namespace SimpleSurvey
                 user.LastName = txtLastName.Text;
                 user.UserName = txtUserName.Text;
                 user.Password = txtPassword.Text;
-                user.Class = Int32.Parse(ddlClasses.SelectedValue);
+                
+                foreach (ListItem li in ListClasses.Items)
+                {
+                    if (li.Selected)
+                    {
+                        UserClass uc = new UserClass();
+                        uc.ClassID = Int32.Parse(li.Text);
+                        uc.UserID = user.ID;
+                        context.AddToUserClasses(uc);
+                    }
+                }
                 user.Role = 2; //Student User
    
                 context.AddToUsers(user);
+                
                 context.SaveChanges();
                 Response.Redirect("ListUsers.aspx");
 

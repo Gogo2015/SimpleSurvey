@@ -30,11 +30,13 @@ namespace SimpleSurvey
                 {
                     txtUserName.Text = "Sucessful Login";
 
-                    if (user.Role != 1) //if student
+                    if (user.Role == 2) //if student
                         Response.Redirect("SurveyForm.aspx?id=" + user.ID);
-                    
-                    else //if admin
-                        Response.Redirect("Menu.aspx");
+
+                    else if (user.Role == 1002)//if teacher
+                        Response.Redirect("Menu.aspx?id=0"+user.ID);
+                    else//if admin
+                        Response.Redirect("ListTeachers.aspx");
                 } 
                 else
                 {
@@ -54,6 +56,11 @@ namespace SimpleSurvey
                 return query.First(); 
             }
             return null;
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
         }
     }
 }

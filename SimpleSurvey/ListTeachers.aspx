@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListUsers.aspx.cs" Inherits="SimpleSurvey.ListUsers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListTeachers.aspx.cs" Inherits="SimpleSurvey.ListTeachers" %>
 
 <!DOCTYPE html>
 
@@ -8,24 +8,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style ="text-align: center">
-            <asp:Label ID="lbClass" runat="server" Font-Bold="True"></asp:Label>
-
-        </div>
-        
         <div style="text-align: right;">
-            
-            <br />
-            <br />
-            <asp:Button ID="Button1" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
+            <asp:Button ID="btnMenu" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
         </div>
         
-        <asp:GridView ID="UserView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">
+        <asp:GridView ID="TeacherView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">
             <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
              <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditUser.aspx?ID={0}" DataTextField="ID" />
+                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditTeacher.aspx?ID={0}" DataTextField="ID" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="First Name" DataField="First Name" />
@@ -46,8 +38,7 @@
 
         <br />
         <br />
-        <asp:Button ID="btnAddUser" runat="server" Text="Add Users" OnClick ="btn_AddUser" />
-
+        <asp:Button ID="btnAddTeacher" runat="server" Text="Add Teacher" OnClick ="btn_AddTeacher" />
     </form>
 </body>
 </html>

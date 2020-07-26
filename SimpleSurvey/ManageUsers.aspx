@@ -39,14 +39,12 @@
                 <td>
                     <br />
         <br />
-        <asp:Label ID="LClass" runat="server" Text="Class:"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-        <tr>
-                <td style="width: 25%; text-align: left;">
-                    <asp:DropDownList ID="ddlClasses" runat="server" Width="200px">
-        </asp:DropDownList>
-                    &nbsp;</td>
-                <td>
+        <asp:Label ID="LClass" runat="server" Text="Classes:"></asp:Label>
+        <div style ="margin-left: 120px">
+        <asp:CheckBoxList ID="ListClasses" runat="server">
+        </asp:CheckBoxList>
+                        </div>
+        <p style="margin-left: 40px">
                     <br /><br />
                     <asp:Button ID="btnSubmit" runat="server" Enabled="True" 
                         onclick="btnSubmit_Click" Text="Submit" />
@@ -54,6 +52,8 @@
                         Text="Cancel" />
                 </td>
             </tr>
+
+        </p>
 
     </form>
 

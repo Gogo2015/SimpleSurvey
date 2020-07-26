@@ -18,6 +18,7 @@ namespace SimpleSurvey
         {
             if (Page.IsValid)
             {
+                int id = Int32.Parse(Request.QueryString["id"]);
                 String val = ddlTypes.SelectedItem.Value;
                 switch (val)
                 {
@@ -28,13 +29,13 @@ namespace SimpleSurvey
                         Response.Redirect("ListQuestions.aspx");
                         break;
                     case "Manage Users":
-                        Response.Redirect("ListUsers.aspx");
+                        Response.Redirect("MenuUserClasses.aspx?id=0" + id);
                         break;
                     case "Take Survey":
                         Response.Redirect("SurveyForm.aspx");
                         break;
                     case "Survey Responses":
-                        Response.Redirect("MenuSurveys.aspx");
+                        Response.Redirect("MenuSurveys.aspx?id=0" + id);
                         break;
                     default:
                         break;

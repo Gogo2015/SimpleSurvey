@@ -19,6 +19,11 @@
         <asp:Label ID="lbRegistration" runat="server" Text="Registration Code:"></asp:Label>
 &nbsp;&nbsp;
         <asp:TextBox ID="txtCode" runat="server" Width="200px"></asp:TextBox>
+        <br />
+        <br />
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit" onclick ="BtnSubmit"/>
+&nbsp;
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" onlick ="BtnCancel"/>
     </form>
 </body>
 </html>

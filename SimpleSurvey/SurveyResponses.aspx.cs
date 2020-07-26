@@ -32,7 +32,6 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Last Name"));
             dt.Columns.Add(new DataColumn("User Name"));
             dt.Columns.Add(new DataColumn("ID"));
-            dt.Columns.Add(new DataColumn("Class"));
             dt.Columns.Add(new DataColumn("SurveyID"));
             dt.Columns.Add(new DataColumn("FilledBy"));
             dt.Columns.Add(new DataColumn("FilledSurvey"));
@@ -40,7 +39,7 @@ namespace SimpleSurvey
 
             DataRow newRow;
             List<String> userNames = new List<String>();
-            foreach (SurveyResponseView srv in context.SurveyResponseViews.OrderBy(srv => srv.Class))
+            foreach (SurveyResponseView srv in context.SurveyResponseViews.OrderBy(srv => srv.LastName))
             {
                 newRow = dt.NewRow();
                 if (srv != null)

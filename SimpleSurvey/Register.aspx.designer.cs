@@ -11,7 +11,7 @@ namespace SimpleSurvey
 {
 
 
-    public partial class ManageUsers
+    public partial class Register
     {
 
         /// <summary>
@@ -24,31 +24,22 @@ namespace SimpleSurvey
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// UserMaintenance control.
+        /// lbTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UserMaintenance;
+        protected global::System.Web.UI.WebControls.Label lbTitle;
 
         /// <summary>
-        /// Button1 control.
+        /// lbFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// LFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LFirstName;
+        protected global::System.Web.UI.WebControls.Label lbFirstName;
 
         /// <summary>
         /// txtFirstName control.
@@ -60,13 +51,13 @@ namespace SimpleSurvey
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
 
         /// <summary>
-        /// LLastName control.
+        /// lbLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LLastName;
+        protected global::System.Web.UI.WebControls.Label lbLastName;
 
         /// <summary>
         /// txtLastName control.
@@ -78,31 +69,40 @@ namespace SimpleSurvey
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
 
         /// <summary>
-        /// LUserName control.
+        /// lbUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LUserName;
+        protected global::System.Web.UI.WebControls.Label lbUsername;
 
         /// <summary>
-        /// txtUserName control.
+        /// txtUsername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserName;
+        protected global::System.Web.UI.WebControls.TextBox txtUsername;
 
         /// <summary>
-        /// LPassword control.
+        /// txtErrorUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LPassword;
+        protected global::System.Web.UI.WebControls.Label txtErrorUser;
+
+        /// <summary>
+        /// lbPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbPassword;
 
         /// <summary>
         /// txtPassword control.
@@ -114,22 +114,31 @@ namespace SimpleSurvey
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
-        /// LClass control.
+        /// lbCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LClass;
+        protected global::System.Web.UI.WebControls.Label lbCode;
 
         /// <summary>
-        /// ListClasses control.
+        /// txtCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList ListClasses;
+        protected global::System.Web.UI.WebControls.TextBox txtCode;
+
+        /// <summary>
+        /// txtErrorClass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtErrorClass;
 
         /// <summary>
         /// btnSubmit control.

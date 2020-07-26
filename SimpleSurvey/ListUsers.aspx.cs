@@ -10,9 +10,17 @@ namespace SimpleSurvey
 {
     public partial class ListUsers : System.Web.UI.Page
     {
-        
+        int id;
+        SurveyAppConString context = new SurveyAppConString();
+        List<User> users;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            id = Int32.Parse(Request.QueryString["class"]);
+            var titleQuery = from Class cl in context.Classes
+                             where (cl.ID == id)
+                             select cl;
+            lbClass.Text = titleQuery.First().ClassName;
             UserView.DataSource = GetData();
             
             UserView.DataBind();
@@ -26,18 +34,29 @@ namespace SimpleSurvey
 
         DataTable GetData()
         {
-            SurveyAppConString context = new SurveyAppConString();
+            
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("First Name"));
             dt.Columns.Add(new DataColumn("Last Name"));
             dt.Columns.Add(new DataColumn("User Name"));
             dt.Columns.Add(new DataColumn("ID"));
-            dt.Columns.Add(new DataColumn("Class"));
 
             DataRow newRow;
-
-            foreach (User u in context.Users.OrderBy(user => user.Class))
+            var userQuery = from UserClass uc in context.UserClasses
+                            where (uc.ClassID == id)
+                            select uc;
+            foreach (UserClass uc in userQuery.ToList())
+            {
+                var queryu = from User user in context.Users
+                             where (user.ID == uc.UserID)
+                             select user;
+                foreach(User u in queryu)
+                {
+                    users.Add(u);
+                }
+            }
+            foreach (User u in users.OrderBy(user => user.LastName))
             {
                 if (u != null)
                 {
@@ -46,10 +65,6 @@ namespace SimpleSurvey
                     newRow[1] = u.LastName;
                     newRow[2] = u.UserName;
                     newRow[3] = u.ID;
-                    var classQuery = from c in context.Classes
-                                     where (c.ID == u.Class)
-                                     select c;
-                    newRow[4] = classQuery.First().ClassName;
                     dt.Rows.Add(newRow);
                 }
             }
@@ -59,7 +74,7 @@ namespace SimpleSurvey
 
         protected void btn_AddUser(Object sender, EventArgs e)
         {
-            Response.Redirect("ManageUsers.aspx");
+            Response.Redirect("ManageUsers.aspx?id="+id);
         }
     }
 }
