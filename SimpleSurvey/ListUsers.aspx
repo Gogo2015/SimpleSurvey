@@ -25,7 +25,7 @@
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
              <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditUser.aspx?ID={0}" DataTextField="ID" />
+                <asp:HyperLinkField DataNavigateUrlFields="ID,teacher" HeaderText="ID" DataNavigateUrlFormatString="EditUser.aspx?ID={0}&teacher={1}" DataTextField="ID" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="First Name" DataField="First Name" />

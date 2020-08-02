@@ -123,13 +123,13 @@ namespace SimpleSurvey
         protected global::System.Web.UI.WebControls.Label LClass;
 
         /// <summary>
-        /// ddlClasses control.
+        /// ListClasses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClasses;
+        protected global::System.Web.UI.WebControls.CheckBoxList ListClasses;
 
         /// <summary>
         /// btnSubmit control.

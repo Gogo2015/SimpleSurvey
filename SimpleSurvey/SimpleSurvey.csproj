@@ -82,12 +82,14 @@
     <Content Include="EditClass.aspx" />
     <Content Include="EditQuestions.aspx" />
     <Content Include="EditSurvey.aspx" />
+    <Content Include="EditTeacher.aspx" />
     <Content Include="EditUser.aspx" />
     <Content Include="ListQuestions.aspx" />
     <Content Include="ListSurvey.aspx" />
     <Content Include="ListTeachers.aspx" />
     <Content Include="ListUsers.aspx" />
     <Content Include="LoginPage.aspx" />
+    <Content Include="Logout.aspx" />
     <Content Include="ManageQuestions.aspx" />
     <Content Include="ManageSurveys.aspx" />
     <Content Include="ManageUsers.aspx" />
@@ -95,6 +97,7 @@
     <Content Include="MenuSurveys.aspx" />
     <Content Include="MenuUserClasses.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="StyleSheet.css" />
     <Content Include="SurveyForm.aspx" />
     <Content Include="SurveyResponses.aspx" />
     <Content Include="ViewClasses.aspx" />
@@ -151,6 +154,13 @@
     <Compile Include="EditSurvey.aspx.designer.cs">
       <DependentUpon>EditSurvey.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditTeacher.aspx.cs">
+      <DependentUpon>EditTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditTeacher.aspx.designer.cs">
+      <DependentUpon>EditTeacher.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EditUser.aspx.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +202,13 @@
     </Compile>
     <Compile Include="LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageQuestions.aspx.cs">
       <DependentUpon>ManageQuestions.aspx</DependentUpon>

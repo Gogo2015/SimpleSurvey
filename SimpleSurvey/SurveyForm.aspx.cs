@@ -49,7 +49,7 @@ namespace SimpleSurvey
             TableRow tr;
             TableCell tc;
             TextBox txt;
-            CheckBox cbk;
+            //CheckBox cbk;
             DropDownList ddl;
             RadioButtonList rbl;
 

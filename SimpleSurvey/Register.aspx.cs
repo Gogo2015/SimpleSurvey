@@ -35,7 +35,9 @@ namespace SimpleSurvey
                         if (classQuery.First() != null)
                         {
                             User user = new User();
-                            user.Class = classQuery.First().ID;
+                            UserClass uc = new UserClass();
+                            uc.ClassID = classQuery.First().ID;
+                            uc.UserID = user.ID;
                             user.FirstName = txtFirstName.Text;
                             user.LastName = txtLastName.Text;
                             user.UserName = txtUsername.Text;
@@ -57,7 +59,7 @@ namespace SimpleSurvey
                 }
                 else
                 {
-                    txtPassword.Text = "Password Too Short";
+                    txtErrorPass.Text = "Password Too Short";
                 }
                  }
             

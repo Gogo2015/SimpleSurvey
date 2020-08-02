@@ -11,7 +11,17 @@ namespace SimpleSurvey
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["id"] == null)
+                    Response.Redirect("Logout.aspx");
+                else
+                {
+                    Response.ClearHeaders();
+                    Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+                    Response.AddHeader("Pragma", "no-cache");
+                }
+            }
 
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -23,19 +33,22 @@ namespace SimpleSurvey
                 switch (val)
                 {
                     case "Manage Surveys":
-                        Response.Redirect("ListSurvey.aspx");
+                        Response.Redirect("ListSurvey.aspx?id="+id);
                         break;
                     case "Manage Questions":
-                        Response.Redirect("ListQuestions.aspx");
+                        Response.Redirect("ListQuestions.aspx?id=" + id);
                         break;
                     case "Manage Users":
                         Response.Redirect("MenuUserClasses.aspx?id=0" + id);
                         break;
                     case "Take Survey":
-                        Response.Redirect("SurveyForm.aspx");
+                        Response.Redirect("SurveyForm.aspx?id="+id);
                         break;
                     case "Survey Responses":
                         Response.Redirect("MenuSurveys.aspx?id=0" + id);
+                        break;
+                    case "Manage Classes":
+                        Response.Redirect("ViewClasses.aspx?id=" + id);
                         break;
                     default:
                         break;
@@ -44,6 +57,11 @@ namespace SimpleSurvey
                 }
 
             }
+        }
+
+        protected void btn_Logout_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Logout.aspx");
         }
     }
 }

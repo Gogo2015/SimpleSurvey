@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="text-align: right;">
-            <asp:Button ID="btnMenu" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
+            <asp:Button ID="btnMenu" runat="server" Font-Bold="True" Text="Logout" Width="169px" onclick="btn_Logout_Click" />
         </div>
         
         <asp:GridView ID="TeacherView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">

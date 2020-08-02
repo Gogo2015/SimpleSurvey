@@ -15,8 +15,9 @@
         <asp:DropDownList ID="ddlClasses" runat="server">
         </asp:DropDownList>
         <br />
+        <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button1" runat="server" Text="Go" />
+        <asp:Button ID="btnSubmit" runat="server" Text="Go" Width="50px" onclick ="btnSubmit_Click"/>
     </form>
 </body>
 </html>

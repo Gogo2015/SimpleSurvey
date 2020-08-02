@@ -17,6 +17,8 @@ namespace SimpleSurvey
         {
             id = Int32.Parse(Request.QueryString["id"]);
             ddlClasses.DataSource = GetClasses();
+            ddlClasses.DataTextField = "ClassName";
+            ddlClasses.DataValueField = "ID";
             ddlClasses.DataBind();
         }
 
@@ -28,11 +30,11 @@ namespace SimpleSurvey
             return classQuery.ToList();
         }
 
-        protected void btnSubmit_Click()
+        protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (ddlClasses.SelectedValue != null)
             {
-                Response.Redirect("ListUsers.aspx?class=" + ddlClasses.SelectedValue);
+                Response.Redirect("ListUsers.aspx?id=" + id + "&class=" + ddlClasses.SelectedValue);
             }
         }
     }

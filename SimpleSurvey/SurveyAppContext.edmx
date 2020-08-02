@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClassName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="RegistrationCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -76,7 +76,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
           <Property Name="ClassID" Type="int" />
         </EntityType>
@@ -126,6 +126,18 @@ warning 6002: The table/view 'SurveyApp.dbo.SurveyResponseView' does not have a 
           <Property Name="LastName" Type="varchar" MaxLength="200" />
           <Property Name="UserName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Class" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyApp.dbo.UserClassTeacherView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserClassTeacherView">
+          <Key>
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
         </EntityType>
         <Association Name="FK_Classes_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -321,6 +333,14 @@ FROM [dbo].[SurveyResponseDetailedView] AS [SurveyResponseDetailedView]</Definin
 [SurveyResponseView].[Class] AS [Class]
 FROM [dbo].[SurveyResponseView] AS [SurveyResponseView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="UserClassTeacherView" EntityType="Self.UserClassTeacherView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[UserClassTeacherView].[CreatedBy] AS [CreatedBy], 
+[UserClassTeacherView].[UserID] AS [UserID], 
+[UserClassTeacherView].[Expr1] AS [Expr1], 
+[UserClassTeacherView].[ClassID] AS [ClassID]
+FROM [dbo].[UserClassTeacherView] AS [UserClassTeacherView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Classes_Users" Association="Self.FK_Classes_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Classes" EntitySet="Classes" />
@@ -426,6 +446,7 @@ FROM [dbo].[SurveyResponseView] AS [SurveyResponseView]</DefiningQuery>
             <End Role="Class" EntitySet="Classes" />
             <End Role="Survey" EntitySet="Surveys" />
           </AssociationSet>
+          <EntitySet Name="UserClassTeacherViews" EntityType="SurveyAppModel.UserClassTeacherView" />
         </EntityContainer>
         <EntityType Name="Class">
           <Key>
@@ -699,6 +720,16 @@ FROM [dbo].[SurveyResponseView] AS [SurveyResponseView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserClassTeacherView">
+          <Key>
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -825,6 +856,16 @@ FROM [dbo].[SurveyResponseView] AS [SurveyResponseView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserClassTeacherViews">
+            <EntityTypeMapping TypeName="SurveyAppModel.UserClassTeacherView">
+              <MappingFragment StoreEntitySet="UserClassTeacherView">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -869,6 +910,7 @@ FROM [dbo].[SurveyResponseView] AS [SurveyResponseView]</DefiningQuery>
         <AssociationConnector Association="SurveyAppModel.FK_Surveys_Users" />
         <AssociationConnector Association="SurveyAppModel.FK_UserClasses_Users" />
         <AssociationConnector Association="SurveyAppModel.FK_Surveys_Classes" />
+        <EntityTypeShape EntityType="SurveyAppModel.UserClassTeacherView" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </Diagrams>
   </Designer>

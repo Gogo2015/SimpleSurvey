@@ -10,15 +10,17 @@ namespace SimpleSurvey
 {
     public partial class ListUsers : System.Web.UI.Page
     {
-        int id;
+        int classId;
+        protected int id;
         SurveyAppConString context = new SurveyAppConString();
-        List<User> users;
+        List<User> users = new List<User>();
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            id = Int32.Parse(Request.QueryString["class"]);
+            classId = Int32.Parse(Request.QueryString["class"]);
+            id = Int32.Parse(Request.QueryString["id"]);
             var titleQuery = from Class cl in context.Classes
-                             where (cl.ID == id)
+                             where (cl.ID == classId)
                              select cl;
             lbClass.Text = titleQuery.First().ClassName;
             UserView.DataSource = GetData();
@@ -41,17 +43,18 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Last Name"));
             dt.Columns.Add(new DataColumn("User Name"));
             dt.Columns.Add(new DataColumn("ID"));
+            dt.Columns.Add(new DataColumn("Teacher"));
 
             DataRow newRow;
             var userQuery = from UserClass uc in context.UserClasses
-                            where (uc.ClassID == id)
+                            where (uc.ClassID == classId)
                             select uc;
             foreach (UserClass uc in userQuery.ToList())
             {
                 var queryu = from User user in context.Users
                              where (user.ID == uc.UserID)
                              select user;
-                foreach(User u in queryu)
+                foreach(User u in queryu.ToList())
                 {
                     users.Add(u);
                 }
@@ -65,6 +68,7 @@ namespace SimpleSurvey
                     newRow[1] = u.LastName;
                     newRow[2] = u.UserName;
                     newRow[3] = u.ID;
+                    newRow[4] = id;
                     dt.Rows.Add(newRow);
                 }
             }

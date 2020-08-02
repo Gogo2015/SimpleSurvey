@@ -12,48 +12,58 @@ namespace SimpleSurvey
     {
         User user;
         SurveyAppConString context = new SurveyAppConString();
-        public int id;
+        int id;
+        int teacherid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            txtPassword.Attributes["type"] = "password";
-            // get the user id
             id = Int32.Parse(Request.QueryString["ID"]);
-            
+            teacherid = Int32.Parse(Request.QueryString["teacher"]);
             if (!Page.IsPostBack)
-            {
+            { 
+                txtPassword.Attributes["type"] = "password";
+                // get the user id
+                
+                context = new SurveyAppConString();
                 var queryclass = from Class cl in context.Classes
-                                 where (cl.CreatedBy == id)
+                                 where (cl.CreatedBy == teacherid)
                                  select cl;
                 foreach (Class c in queryclass.ToList())
                 {
-                    ddlClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
+                    ListItem li = new ListItem();
+                    li.Text = c.ClassName;
+                    li.Value = c.ID.ToString();
+                    ListClasses.Items.Add(li);
                 }
+                ListClasses.DataBind();
 
 
 
                 var query = from u in context.Users
-                            where (u.ID == id)
-                            select u;
+                                where (u.ID == id)
+                                select u;
 
-                user = query.First<User>();
+                    user = query.First<User>();
 
-                txtFirstName.Text = user.FirstName;
-                txtLastName.Text = user.LastName;
-                txtUserName.Text = user.UserName;
-                txtPassword.Text = user.Password;
-                var queryUser = from UserClass cl in context.UserClasses
-                                 where (cl.UserID==user.ID)
-                                 select cl;
-                foreach (UserClass uc in queryUser.ToList())
-                {
-                    var querycl = from Class c in context.Classes
-                                  where (c.ID == uc.ClassID)
-                                  select c;
-                    if (querycl.Count() != 0)
+                    txtFirstName.Text = user.FirstName;
+                    txtLastName.Text = user.LastName;
+                    txtUserName.Text = user.UserName;
+                    txtPassword.Text = user.Password;
+                    var queryUser = from UserClass cl in context.UserClasses
+                                     where (cl.UserID==user.ID)
+                                     select cl;
+                    foreach (UserClass uc in queryUser.ToList())
                     {
-                        ddlClasses.SelectedValue = querycl.First().ClassName;
+                        var querycl = from Class c in context.Classes
+                                      where (c.ID == uc.ClassID)
+                                      select c;
+                        if (querycl.Count() != 0)
+                        {
+                        foreach (Class c in querycl.ToList())
+                        {
+                            ListClasses.Items.FindByValue(c.ID.ToString()).Selected = true;
+                        }
+                        }
                     }
-                }
                 
                 
 
@@ -62,29 +72,45 @@ namespace SimpleSurvey
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            
-            
-            var query = from u in context.Users
-                        where (u.ID == id)
-                        select u;
 
-            user = query.First<User>();
+            if (Page.IsValid)
+            {
+                var query = from u in context.Users
+                            where (u.ID == id)
+                            select u;
 
-            user.FirstName = txtFirstName.Text;
-            user.LastName = txtLastName.Text;
-            user.UserName = txtUserName.Text;
-            user.Password = txtPassword.Text;
-            var uc = from UserClass c in context.UserClasses
-                     where (c.ClassID ==)
-            uc.ClassID = Int32.Parse(ddlClasses.SelectedItem.Value);
-            context.SaveChanges();
-            Response.Redirect("ListUsers.aspx");
-           
+                user = query.First<User>();
+
+                user.FirstName = txtFirstName.Text;
+                user.LastName = txtLastName.Text;
+                user.UserName = txtUserName.Text;
+                user.Password = txtPassword.Text;
+                var deleteClasses = from UserClass ucd in context.UserClasses
+                                    where (ucd.UserID == user.ID)
+                                    select ucd;
+                foreach (UserClass uc in deleteClasses.ToList())
+                {
+                    context.DeleteObject(uc);
+                }
+
+                foreach (ListItem li in ListClasses.Items)
+                {
+                    if (li.Selected)
+                    {
+                        UserClass uc = new UserClass();
+                        uc.ClassID = Int32.Parse(li.Value);
+                        uc.UserID = user.ID;
+                        context.AddToUserClasses(uc);
+                    }
+                }
+                context.SaveChanges();
+                Response.Redirect("MenuUserClasses.aspx?id=" + teacherid);
+            }
         }
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id="+teacherid);
         }
 
         protected void btnDelete_Click(Object sender, EventArgs e)

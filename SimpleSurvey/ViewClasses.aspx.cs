@@ -10,8 +10,10 @@ namespace SimpleSurvey
 {
     public partial class ViewClasses : System.Web.UI.Page
     {
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             classView.DataSource = GetData();
 
             classView.DataBind();
@@ -20,7 +22,7 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id="+id);
         }
 
         DataTable GetData()
@@ -31,10 +33,12 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Registration Code"));
             dt.Columns.Add(new DataColumn("ID"));
 
-
+            var classquery = from Class c in context.Classes
+                            where (c.CreatedBy == id)
+                            select c;
             DataRow newRow;
             List<String> classNames = new List<String>();
-            foreach (Class c in context.Classes)
+            foreach (Class c in classquery.ToList())
             {
                 newRow = dt.NewRow();
                 if (c != null)
@@ -47,6 +51,11 @@ namespace SimpleSurvey
             }
 
             return dt;
+        }
+
+        protected void btn_AddClass_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CreateClass.aspx?id="+id);
         }
     }
 }

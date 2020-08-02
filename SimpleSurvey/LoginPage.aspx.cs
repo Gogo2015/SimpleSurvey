@@ -29,14 +29,14 @@ namespace SimpleSurvey
                 if (user != null)
                 {
                     txtUserName.Text = "Sucessful Login";
-
+                    Session["id"] = user.ID;
                     if (user.Role == 2) //if student
                         Response.Redirect("SurveyForm.aspx?id=" + user.ID);
 
                     else if (user.Role == 1002)//if teacher
                         Response.Redirect("Menu.aspx?id=0"+user.ID);
                     else//if admin
-                        Response.Redirect("ListTeachers.aspx");
+                        Response.Redirect("ListTeachers.aspx?id="+user.ID);
                 } 
                 else
                 {

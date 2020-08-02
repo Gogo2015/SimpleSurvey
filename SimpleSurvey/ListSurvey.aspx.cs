@@ -5,13 +5,16 @@ using System.Web;
 using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.DynamicData;
 
 namespace SimpleSurvey
 {
     public partial class ListSurvey : System.Web.UI.Page
     {
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             UserView.DataSource = GetData();
 
             UserView.DataBind();
@@ -35,8 +38,10 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("ID"));
 
             DataRow newRow;
-
-            foreach (Survey s in context.Surveys)
+            var surveyQuery = from Survey s in context.Surveys
+                              where (s.CreatedBy == id)
+                              select s;
+            foreach (Survey s in surveyQuery.ToList())
             {
                 if (s != null)
                 {

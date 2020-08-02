@@ -22,44 +22,69 @@ namespace SimpleSurvey
                              select cl;
             foreach (Class c in queryclass.ToList())
             {
-                ListClasses.Items.Add(new ListItem(c.ClassName, c.ID.ToString()));
+                ListItem li = new ListItem();
+                li.Text = c.ClassName;
+                li.Value = c.ID.ToString();
+                ListClasses.Items.Add(li);
             }
+            ListClasses.DataBind();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                
-                User user = new User();
-                user.FirstName = txtFirstName.Text;
-                user.LastName = txtLastName.Text;
-                user.UserName = txtUserName.Text;
-                user.Password = txtPassword.Text;
-                
-                foreach (ListItem li in ListClasses.Items)
-                {
-                    if (li.Selected)
-                    {
-                        UserClass uc = new UserClass();
-                        uc.ClassID = Int32.Parse(li.Text);
-                        uc.UserID = user.ID;
-                        context.AddToUserClasses(uc);
-                    }
-                }
-                user.Role = 2; //Student User
-   
-                context.AddToUsers(user);
-                
-                context.SaveChanges();
-                Response.Redirect("ListUsers.aspx");
 
+                if (txtUserName.Text.Length >= 5)//A
+                {
+                    if (txtPassword.Text.Length >= 5) //B
+                    {
+                        var query = from u in context.Users
+                                    where (u.UserName == txtUserName.Text)
+                                    select u;
+                        if (query.Count() == 0)
+                        {
+                            User user = new User();
+                            user.FirstName = txtFirstName.Text;
+                            user.LastName = txtLastName.Text;
+                            user.UserName = txtUserName.Text;
+                            user.Password = txtPassword.Text;
+                            user.Role = 2;
+                            context.AddToUsers(user);
+                            foreach (ListItem li in ListClasses.Items)
+                            {
+                                if (li.Selected)
+                                {
+                                    int classid = Int32.Parse(li.Value);
+                                    UserClass uc = new UserClass();
+                                    var classquery = from Class c in context.Classes
+                                                     where (c.ID == classid)
+                                                     select c;
+                                    uc.ClassID = classquery.First().ID;
+                                    uc.UserID = user.ID;
+                                    context.AddToUserClasses(uc);
+                                }
+                            }
+                            context.SaveChanges();
+                            Response.Redirect("MenuUserClasses.aspx?id=" + id);
+                        }
+                        else
+                        {
+                            txtErrorUser.Text = "Username Already Taken";
+                        }
+                    }
+                    else
+                    {
+                        txtErrorPass.Text = "Password Too Short";
+                    }
+
+                }
             }
         }
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id="+id);
         }
     }
 }

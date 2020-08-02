@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddTeacher.aspx.cs" Inherits="SimpleSurvey.AddTeacher" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditTeacher.aspx.cs" Inherits="SimpleSurvey.EditTeacher" %>
 
 <!DOCTYPE html>
 
@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="margin-left: 440px">
-            <asp:Label ID="UserMaintenance" runat="server" style="font-weight: 700" Text="User Maintenance"></asp:Label>
+            <asp:Label ID="UserMaintenance" runat="server" style="font-weight: 700" Text="Teacher Maintenance"></asp:Label>
         </div>
         <div style="text-align: right;">
         </div>
@@ -31,17 +31,26 @@
         <br />
         <asp:Label ID="LPassword" runat="server" Text="Password:"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="txtPassword" runat="server" MaxLength="200" Width="200px" EnableViewState="False" TextMode="Password"></asp:TextBox>
+        <asp:TextBox ID="txtPassword" runat="server" MaxLength="200" Width="200px"></asp:TextBox>
+        <tr>
+                <td style="width: 25%; text-align: left;">
+                    &nbsp;</td>
+                <td>
                     <br />
         <br />
-                    <asp:Button ID="btnSubmit" class="button1" runat="server" Enabled="True" 
-                        onclick="btnSubmit_Click" Text="Submit" />
+        <div style ="margin-left: 120px">
+                        </div>
+                    <br /><br />
+                    <asp:Button ID="btnSubmit" runat="server" Enabled="True" 
+                        onclick="btnSubmit_Click" Text="Save" />
                     &nbsp;<asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
                         Text="Cancel" />
                 </td>
             </tr>
 
-        
+    &nbsp;<asp:Button ID="btnDelete" runat="server" Text="Delete" Onclick ="btnDelete_Click" />
+
+    &nbsp;<asp:Button ID="btnReset" runat="server" Text="Reset Password" OnClick ="BtnReset" />
 
     </form>
 

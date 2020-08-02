@@ -256,6 +256,22 @@ namespace SimpleSurvey
             }
         }
         private ObjectSet<SurveyResponseView> _SurveyResponseViews;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserClassTeacherView> UserClassTeacherViews
+        {
+            get
+            {
+                if ((_UserClassTeacherViews == null))
+                {
+                    _UserClassTeacherViews = base.CreateObjectSet<UserClassTeacherView>("UserClassTeacherViews");
+                }
+                return _UserClassTeacherViews;
+            }
+        }
+        private ObjectSet<UserClassTeacherView> _UserClassTeacherViews;
 
         #endregion
 
@@ -347,6 +363,14 @@ namespace SimpleSurvey
         public void AddToSurveyResponseViews(SurveyResponseView surveyResponseView)
         {
             base.AddObject("SurveyResponseViews", surveyResponseView);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserClassTeacherViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserClassTeacherViews(UserClassTeacherView userClassTeacherView)
+        {
+            base.AddObject("UserClassTeacherViews", userClassTeacherView);
         }
 
         #endregion
@@ -2797,6 +2821,140 @@ namespace SimpleSurvey
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SurveyAppModel", Name="UserClassTeacherView")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserClassTeacherView : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserClassTeacherView object.
+        /// </summary>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="expr1">Initial value of the Expr1 property.</param>
+        public static UserClassTeacherView CreateUserClassTeacherView(global::System.Int32 createdBy, global::System.Int32 expr1)
+        {
+            UserClassTeacherView userClassTeacherView = new UserClassTeacherView();
+            userClassTeacherView.CreatedBy = createdBy;
+            userClassTeacherView.Expr1 = expr1;
+            return userClassTeacherView;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                if (_CreatedBy != value)
+                {
+                    OnCreatedByChanging(value);
+                    ReportPropertyChanging("CreatedBy");
+                    _CreatedBy = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("CreatedBy");
+                    OnCreatedByChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserID;
+        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Expr1
+        {
+            get
+            {
+                return _Expr1;
+            }
+            set
+            {
+                if (_Expr1 != value)
+                {
+                    OnExpr1Changing(value);
+                    ReportPropertyChanging("Expr1");
+                    _Expr1 = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Expr1");
+                    OnExpr1Changed();
+                }
+            }
+        }
+        private global::System.Int32 _Expr1;
+        partial void OnExpr1Changing(global::System.Int32 value);
+        partial void OnExpr1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ClassID
+        {
+            get
+            {
+                return _ClassID;
+            }
+            set
+            {
+                OnClassIDChanging(value);
+                ReportPropertyChanging("ClassID");
+                _ClassID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClassID");
+                OnClassIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ClassID;
+        partial void OnClassIDChanging(Nullable<global::System.Int32> value);
+        partial void OnClassIDChanged();
+
+        #endregion
+
+    
     }
 
     #endregion

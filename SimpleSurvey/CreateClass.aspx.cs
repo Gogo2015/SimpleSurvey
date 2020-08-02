@@ -10,19 +10,26 @@ namespace SimpleSurvey
     public partial class CreateClass : System.Web.UI.Page
     {
         SurveyAppConString context;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            id = Int32.Parse(Request.QueryString["id"]);
+            context = new SurveyAppConString();
         }
 
         protected void BtnSubmit(object sender, EventArgs e)
         {
-            context = new SurveyAppConString();
-            Class c = new Class();
-            c.ClassName = txtClassName.Text;
-            c.RegistrationCode = txtCode.Text;
-            context.AddToClasses(c);
-            context.SaveChanges();
+            if (Page.IsValid)
+            {
+                
+                Class c = new Class();
+                c.ClassName = txtClassName.Text;
+                c.RegistrationCode = txtCode.Text;
+                c.CreatedBy = id;
+                context.AddToClasses(c);
+                context.SaveChanges();
+                Response.Redirect("ViewClasses.aspx?id=" + id);
+            }
         }
     }
 }
