@@ -14,7 +14,7 @@
     <div id="page-wrap">
     <form id="form1" runat="server">
        
-<asp:Label CssClass="title" style="text-align:center" ID="Label1" runat="server" Font-Bold="True" Text="LOGIN" Width="770px"></asp:Label>
+<asp:Label CssClass="title" style="text-align:center" ID="Label1" runat="server" Font-Bold="True" Text="LOGIN" Width="796px"></asp:Label>
         
         <br />
         

@@ -15,7 +15,6 @@ namespace SimpleSurvey
         {
             id = Int32.Parse(Request.QueryString["id"]);
             context = new SurveyAppConString();
-            
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

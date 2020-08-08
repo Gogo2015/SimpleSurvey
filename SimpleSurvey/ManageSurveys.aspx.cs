@@ -10,11 +10,27 @@ namespace SimpleSurvey
     public partial class ManageSurveys : System.Web.UI.Page
     {
         SurveyAppConString context;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             context = new SurveyAppConString();
+            var queryclass = from Class cl in context.Classes
+                             where (cl.CreatedBy == id)
+                             select cl;
             if (!IsPostBack)
+            {
+                foreach (Class c in queryclass.ToList())
+                {
+                    ListItem li = new ListItem();
+                    li.Text = c.ClassName;
+                    li.Value = c.ID.ToString();
+                    ListClasses.Items.Add(li);
+                }
+                ListClasses.DataBind();
+
                 GetQuestions();
+            }
         }
         private void GetQuestions()
         {
@@ -29,23 +45,29 @@ namespace SimpleSurvey
         {
             if (Page.IsValid)
             {
-                Survey survey = new Survey();
-                survey.Title = txtTitle.Text;
-                survey.Description = txtDesc.Text;
-                survey.ExpiresOn = Convert.ToDateTime(txtDate.Text.Trim());
-                survey.CreatedOn = Convert.ToDateTime(DateTime.Now);
-                survey.CreatedBy = 2;
-                List<SurveyQuestion> questions = new List<SurveyQuestion>();
-                foreach (ListItem li in lbTarget.Items)
-                {
-                    SurveyQuestion quest = new SurveyQuestion();
-                    quest.QuestionID = int.Parse(li.Value);
-                    survey.SurveyQuestions.Add(quest);
-                    questions.Add(quest);
+                foreach (ListItem lc in ListClasses.Items) {
+                    if (lc.Selected == true)
+                    {
+                        Survey survey = new Survey();
+                        survey.Title = txtTitle.Text;
+                        survey.Description = txtDesc.Text;
+                        survey.ExpiresOn = Convert.ToDateTime(txtDate.Text.Trim());
+                        survey.CreatedOn = Convert.ToDateTime(DateTime.Now);
+                        survey.CreatedBy = id;
+                        survey.Class = Int32.Parse(lc.Value);
+                        List<SurveyQuestion> questions = new List<SurveyQuestion>();
+                        foreach (ListItem li in lbTarget.Items)
+                        {
+                            SurveyQuestion quest = new SurveyQuestion();
+                            quest.QuestionID = int.Parse(li.Value);
+                            survey.SurveyQuestions.Add(quest);
+                            questions.Add(quest);
+                        }
+                        context.AddToSurveys(survey);
+                    }
                 }
-                context.AddToSurveys(survey);
                 context.SaveChanges();
-                Response.Redirect("ListSurvey.aspx");
+                Response.Redirect("ListSurvey.aspx?id=" + id);
             }
         }
 
@@ -91,7 +113,7 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
 
     }

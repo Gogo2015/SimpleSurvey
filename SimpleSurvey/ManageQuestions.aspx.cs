@@ -9,10 +9,13 @@ namespace SimpleSurvey
 {
     public partial class ManageQuestions : System.Web.UI.Page
     {
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
-           if (!IsPostBack)
+            id = Int32.Parse(Request.QueryString["id"]);
+            if (!IsPostBack)
             {
+
                 ddlTypes.Items.Add(QuestionTypes.SingleLineTextBox.ToString());
                 ddlTypes.Items.Add(QuestionTypes.MultiLineTextBox.ToString());
                 ddlTypes.Items.Add(QuestionTypes.SingleSelect.ToString());
@@ -33,13 +36,13 @@ namespace SimpleSurvey
                 quest.Options = txtValues.Text.Trim();
                 context.AddToQuestions(quest);
                 context.SaveChanges();
-                Response.Redirect("ListQuestions.aspx");
+                Response.Redirect("ListQuestions.aspx?id=" + id);
             }
         }
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id="+id);
         }
 
         DataTable GetData()

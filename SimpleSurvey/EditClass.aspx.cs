@@ -44,13 +44,13 @@ namespace SimpleSurvey
              c.ClassName = txtClassName.Text;
              c.RegistrationCode = txtRegistrationCode.Text;
             context.SaveChanges();
-            Response.Redirect("ViewClasses.aspx");
+            Response.Redirect("ViewClasses.aspx?id=" + id);
 
         }
 
         protected void BtnCancel(Object sender, EventArgs e)
         {
-            Response.Redirect("ViewClasses.aspx");
+            Response.Redirect("ViewClasses.aspx?id=" + id);
         }
 
         protected void BtnDelete(Object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace SimpleSurvey
 
             context.Classes.DeleteObject(c);
             context.SaveChanges();
-            Response.Redirect("ViewClasses.aspx");
+            Response.Redirect("ViewClasses.aspx?id=" + id);
         }
     }
 }

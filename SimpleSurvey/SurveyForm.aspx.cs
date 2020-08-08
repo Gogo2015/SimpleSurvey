@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,21 +12,75 @@ namespace SimpleSurvey
     {
         SurveyAppConString context;
         int surveyid;
+        int id;
+        int classid;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             context = new SurveyAppConString();
             if (!IsPostBack)
-                LoadSurveys();
-            btnSubmit.Enabled = false;
-            if (ddlSurveys.SelectedIndex >= 0)
+                LoadClasses();
+            
+        }
+        protected void PopulateSurveys()
+        {
+            var surveyQuery = from Survey s in context.Surveys
+                              where (s.Class == classid)
+                              select s;
+            foreach (Survey survey in surveyQuery)
             {
-                surveyid = int.Parse(ddlSurveys.SelectedValue);
-                PopulateSurvey();
+                ddlSurveys.Items.Add(new ListItem(survey.Title, survey.ID.ToString()));
             }
         }
+
+        protected void btnPopulate_Survey(Object sender, EventArgs e)
+        {
+            if (ddlSurveys.SelectedIndex >= 0)
+            {
+                surveyid = Int32.Parse(ddlSurveys.SelectedValue);
+                PopulateSurvey();
+            }
+            
+        }
+        private void LoadClasses()
+        {
+            var userClassQuery = from UserClass uc in context.UserClasses
+                             where (uc.UserID == id)
+                             select uc;
+            foreach (UserClass uc in userClassQuery.ToList())
+            {
+                var classquery = from Class c in context.Classes
+                                 where (c.ID == uc.ClassID)
+                                 select c;
+                ListItem li = new ListItem();
+                li.Text = classquery.First().ClassName;
+                li.Value = classquery.First().ID.ToString();
+                ddlClasses.Items.Add(li);
+            }
+            ddlClasses.DataBind();
+        }
+
+        protected void btnFind_Surveys(object sender, EventArgs e)
+        {
+            if (ddlClasses.SelectedIndex >= 0)
+            {
+                classid = int.Parse(ddlClasses.SelectedValue);
+                PopulateSurveys();
+            }
+        }
+            
         private void LoadSurveys()
         {
-            List<Survey> surveys = context.Surveys.ToList();
+            var classquery = from UserClass uc in context.UserClasses
+                             where (uc.UserID == id)
+                             select uc;
+            foreach (UserClass uc in classquery.ToList())
+            {
+                var surveyquery = from Survey s in context.Surveys
+                                  where (s.Class == uc.ClassID)
+                                  select s;
+            }
+            List < Survey > surveys = context.Surveys.ToList();
             ddlSurveys.DataSource = surveys;
             ddlSurveys.DataTextField = "Title";
             ddlSurveys.DataValueField = "ID";
@@ -115,11 +170,16 @@ namespace SimpleSurvey
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-
+            Label2.Text = "hello";
             List<Survey_Response> response = GetSurveyReponse();
             foreach (Survey_Response sres in response)
                 context.AddToSurvey_Response(sres);
             context.SaveChanges();
+        }
+
+        protected void btn_Click_AccountInfo(object sender, EventArgs e)
+        {
+            Response.Redirect("AccountInfo.aspx?id=" + id);
         }
 
         private List<Survey_Response> GetSurveyReponse()

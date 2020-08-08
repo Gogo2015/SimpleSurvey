@@ -23,7 +23,7 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
 
         DataTable GetData()
@@ -36,6 +36,9 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Created On"));
             dt.Columns.Add(new DataColumn("Expires On"));
             dt.Columns.Add(new DataColumn("ID"));
+            dt.Columns.Add(new DataColumn("Class"));
+            dt.Columns.Add(new DataColumn("teacherid"));
+            dt.Columns.Add(new DataColumn("classid"));
 
             DataRow newRow;
             var surveyQuery = from Survey s in context.Surveys
@@ -51,6 +54,25 @@ namespace SimpleSurvey
                     newRow[2] = s.CreatedOn;
                     newRow[3] = s.ExpiresOn;
                     newRow[4] = s.ID;
+                    
+                    if (s.Class != null)
+                    {
+                        var classquery = from Class c in context.Classes
+                                         where (c.ID == s.Class)
+                                         select c;
+
+                        newRow[5] = classquery.First().ClassName;
+                        newRow[6] = id;
+                        newRow[7] = classquery.First().ID;
+                    }
+                    else
+                    {
+                        newRow[5] = s.Class;
+                        newRow[6] = id;
+                        newRow[7] = "0";
+                    }
+                    
+                    
                     dt.Rows.Add(newRow);
                 }
             }
@@ -60,7 +82,7 @@ namespace SimpleSurvey
 
         protected void btn_AddSurvey(Object sender, EventArgs e)
         {
-            Response.Redirect("ManageSurveys.aspx");
+            Response.Redirect("ManageSurveys.aspx?id=" + id);
         }
     }
 }

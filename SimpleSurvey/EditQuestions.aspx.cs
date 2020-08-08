@@ -59,13 +59,13 @@ namespace SimpleSurvey
             
 
             context.SaveChanges();
-            Response.Redirect("ListQuestions.aspx");
+            Response.Redirect("ListQuestions.aspx?id=" + id);
 
         }
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
 
         protected void btnDelete_Click(Object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace SimpleSurvey
             context.Questions.DeleteObject(question);
             try { 
                 context.SaveChanges();
-            Response.Redirect("ListQuestions.aspx");
+            Response.Redirect("ListQuestions.aspx?id=" + id);
         }
             catch
             {

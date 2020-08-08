@@ -13,15 +13,13 @@ namespace SimpleSurvey
         {
             if (!IsPostBack)
             {
-                if (Session["id"] == null)
-                    Response.Redirect("Logout.aspx");
-                else
-                {
-                    Response.ClearHeaders();
-                    Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
-                    Response.AddHeader("Pragma", "no-cache");
-                }
+                HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
+                HttpContext.Current.Response.AddHeader("Expires", "0");
             }
+
+            
+            
 
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -45,7 +43,7 @@ namespace SimpleSurvey
                         Response.Redirect("SurveyForm.aspx?id="+id);
                         break;
                     case "Survey Responses":
-                        Response.Redirect("MenuSurveys.aspx?id=0" + id);
+                        Response.Redirect("MenuSurveys.aspx?id=" + id);
                         break;
                     case "Manage Classes":
                         Response.Redirect("ViewClasses.aspx?id=" + id);

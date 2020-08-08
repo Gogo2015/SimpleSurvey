@@ -12,24 +12,37 @@ namespace SimpleSurvey
     {
         Survey survey;
         SurveyAppConString context = new SurveyAppConString();
-        public int id;
+        public int surveyid;
+        int teacherid;
+        public int classid;
         protected void Page_Load(object sender, EventArgs e)
         {
             // get the survey id
-            id = Int32.Parse(Request.QueryString["ID"]);
+            surveyid = Int32.Parse(Request.QueryString["ID"]);
+            teacherid = Int32.Parse(Request.QueryString["teacherid"]);
+            classid = Int32.Parse(Request.QueryString["classid"]);
             if (!Page.IsPostBack)
             {
 
                 var query = from s in context.Surveys
-                            where (s.ID == id)
+                            where (s.ID == surveyid)
                             select s;
-
+                
                 survey = query.First<Survey>();
 
+                
                 txtTitle.Text = survey.Title;
                 txtDesc.Text = survey.Description;
                 txtDate.Text = survey.ExpiresOn.ToString();
+                if (classid != 0)
+                {
+                    var classquery = from Class c in context.Classes
+                                     where (c.ID == survey.Class)
+                                     select c;
+                    txtClass.Text = classquery.First().ClassName;
+                }
                 GetTargetQuestions(survey);
+                
             }
         }
 
@@ -71,6 +84,7 @@ namespace SimpleSurvey
 
             lbTarget.DataBind();
             GetQuestions(questions);
+
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -78,13 +92,13 @@ namespace SimpleSurvey
             if (Page.IsValid)
             {
                 var query = from s in context.Surveys
-                            where (s.ID == id)
+                            where (s.ID == surveyid)
                             select s;
 
                 Survey delete_survey = query.First<Survey>();
                 //find questions associated with survey
                 var query_b = from sq in context.SurveyQuestions
-                            where (sq.SurveyID == id)
+                            where (sq.SurveyID == surveyid)
                             select sq;
                 List<SurveyQuestion> removeQuestions = query_b.ToList<SurveyQuestion>();
                 //delete questions associated with survey(edit)
@@ -101,7 +115,11 @@ namespace SimpleSurvey
                 survey.Description = txtDesc.Text;
                 survey.ExpiresOn = Convert.ToDateTime(txtDate.Text.Trim());
                 survey.CreatedOn = Convert.ToDateTime(DateTime.Now);
-                survey.CreatedBy = 2;
+                survey.CreatedBy = teacherid;
+                if (classid != 0)
+                {
+                    survey.Class = classid;
+                }
                 List<SurveyQuestion> questions = new List<SurveyQuestion>();
                 foreach (ListItem li in lbTarget.Items)
                 {
@@ -112,7 +130,7 @@ namespace SimpleSurvey
                 }
                 context.AddToSurveys(survey);
                 context.SaveChanges();
-                Response.Redirect("ListSurvey.aspx");
+                Response.Redirect("ListSurvey.aspx?id=" + teacherid);
             }
 
 
@@ -121,22 +139,28 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + teacherid);
         }
-
+        /*
         protected void btnDelete_Click(Object sender, EventArgs e)
         {
-            var query = from s in context.Surveys
-                        where (s.ID == id)
+            var query = from Survey s in context.Surveys
+                        where (s.ID == surveyid)
                         select s;
 
             survey = query.First<Survey>();
-
+            var surveyResponseQuery = from Survey_Response sr in context.Survey_Response
+                                      where (sr.SurveyID == surveyid)
+                                      select sr;
+            foreach (Survey_Response sr in surveyResponseQuery.ToList())
+            {
+                context.Survey_Response.DeleteObject(sr);
+            }
             context.Surveys.DeleteObject(survey);
             try
             {
                 context.SaveChanges();
-                Response.Redirect("ListSurvey.aspx");
+                Response.Redirect("ListSurvey.aspx?id=" + teacherid);
             }
             catch
             {
@@ -145,6 +169,7 @@ namespace SimpleSurvey
 
 
         }
+        */
 
         protected void btnAddAll_Click(object sender, EventArgs e)
         {
@@ -189,14 +214,17 @@ namespace SimpleSurvey
         protected void btn_Delete(object sender, EventArgs e)
         {
             var query = from s in context.Surveys
-                        where (s.ID == id)
+                        where (s.ID == surveyid)
                         select s;
 
             Survey delete_survey = query.First<Survey>();
             //find questions associated with survey
             var query_b = from sq in context.SurveyQuestions
-                          where (sq.SurveyID == id)
+                          where (sq.SurveyID == surveyid)
                           select sq;
+            var surveyResponseQuery = from Survey_Response sr in context.Survey_Response
+                                      where (sr.SurveyID == surveyid)
+                                      select sr;
             List<SurveyQuestion> removeQuestions = query_b.ToList<SurveyQuestion>();
             //delete questions associated with survey(edit)
             for (int i = removeQuestions.Count() - 1; i != -1; i--)
@@ -204,10 +232,15 @@ namespace SimpleSurvey
 
                 context.SurveyQuestions.DeleteObject(removeQuestions.ElementAt(i));
             }
+           
+            foreach (Survey_Response sr in surveyResponseQuery.ToList())
+            {
+                context.Survey_Response.DeleteObject(sr);
+            }
             //delete survey
             context.Surveys.DeleteObject(delete_survey);
             context.SaveChanges();
-            Response.Redirect("ListSurvey.aspx");
+            Response.Redirect("ListSurvey.aspx?id=" + teacherid);
         }
     }
 }

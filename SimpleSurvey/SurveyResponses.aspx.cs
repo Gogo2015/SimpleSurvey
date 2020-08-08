@@ -10,8 +10,14 @@ namespace SimpleSurvey
 {
     public partial class SurveyResponses : System.Web.UI.Page
     {
+        int id;
+        int surveyid;
+        SurveyAppConString context;
         protected void Page_Load(object sender, EventArgs e)
         {
+            context = new SurveyAppConString();
+            id = Int32.Parse(Request.QueryString["id"]);
+            surveyid = Int32.Parse(Request.QueryString["surveyid"]);
             SurveyResponseView.DataSource = GetData();
 
             SurveyResponseView.DataBind();
@@ -20,13 +26,12 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
-        
+
         DataTable GetData()
         {
-            SurveyAppConString context = new SurveyAppConString();
-            int id = Int32.Parse(Request.QueryString["id"]);
+            
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("First Name"));
             dt.Columns.Add(new DataColumn("Last Name"));
@@ -47,7 +52,7 @@ namespace SimpleSurvey
                     
                     if (!(userNames.Contains(srv.UserName)))
                     {
-                        if (srv.SurveyID == id)
+                        if (srv.SurveyID == surveyid)
                         {
                             newRow[0] = srv.FirstName;
                             newRow[1] = srv.LastName;

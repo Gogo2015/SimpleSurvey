@@ -10,8 +10,10 @@ namespace SimpleSurvey
 {
     public partial class ListQuestions : System.Web.UI.Page
     {
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            id = Int32.Parse(Request.QueryString["id"]);
             UserView.DataSource = GetData();
 
             UserView.DataBind();
@@ -20,7 +22,7 @@ namespace SimpleSurvey
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
-            Response.Redirect("Menu.aspx");
+            Response.Redirect("Menu.aspx?id=" + id);
         }
 
 
@@ -54,7 +56,7 @@ namespace SimpleSurvey
 
         protected void btn_AddQuestion(Object sender, EventArgs e)
         {
-            Response.Redirect("ManageQuestions.aspx");
+            Response.Redirect("ManageQuestions.aspx?id=" + id);
         }
     }
 }

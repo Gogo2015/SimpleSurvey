@@ -11,9 +11,7 @@ namespace SimpleSurvey
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session.Abandon();
-            Session.Clear();
-            Response.Redirect("LoginPage.aspx?mode=logout");
+            Response.Redirect("LoginPage.aspx?");
         }
     }
 }

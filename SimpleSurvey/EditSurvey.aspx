@@ -5,10 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 25%;
+            height: 23px;
+        }
+        .auto-style2 {
+            height: 23px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Label ID="txtClass" runat="server" Text=""></asp:Label>
     <div style="text-align: right;">
+        
+        <br />
         <asp:Button ID="Button1" runat="server" Font-Bold="True" Text="Return To Menu" Width="169px" onclick="btnReturn_Menu" />
     </div>
     <table  class="style1">
@@ -78,8 +90,12 @@
         </tr>
         <tr>
             <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
+        <div style ="margin-left: 120px">
+                        </div>
+                <br />
+            </td>
             <td>
+                <br />
                 <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
                     Text="Submit" />
                 <asp:Button ID="btnCancel" runat="server" CausesValidation="False" onclick="btnSubmit_Click"
@@ -89,10 +105,10 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
+            <td style="text-align: left;" class="auto-style1">
+                </td>
+            <td class="auto-style2">
+                </td>
         </tr>
     </table>
         <asp:Label ID="txtErrorMessage" runat="server" ForeColor="#993333" Width="300px"></asp:Label>

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/surveyappdbserver2020/databases/SurveyApp",
+      "type": "mssql.azure",
+      "connectionId": "SurveyApp",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

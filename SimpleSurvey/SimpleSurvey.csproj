@@ -76,9 +76,11 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccountInfo.aspx" />
     <Content Include="AddTeacher.aspx" />
     <Content Include="ChangePassword.aspx" />
     <Content Include="CreateClass.aspx" />
+    <Content Include="default.html" />
     <Content Include="EditClass.aspx" />
     <Content Include="EditQuestions.aspx" />
     <Content Include="EditSurvey.aspx" />
@@ -112,6 +114,13 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountInfo.aspx.cs">
+      <DependentUpon>AccountInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountInfo.aspx.designer.cs">
+      <DependentUpon>AccountInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddTeacher.aspx.cs">
       <DependentUpon>AddTeacher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,7 +320,14 @@
       <LastGenOutput>SurveyAppContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\SimpleSurvey20200725162653 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\lasasurvey - Web Deploy.pubxml" />
+    <Content Include="Web - Copy.config" />
+    <Content Include="Web - Copy.Debug.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
+    <Content Include="Web - Copy.Release.config">
+      <DependentUpon>Web - Copy.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

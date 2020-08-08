@@ -123,7 +123,7 @@ namespace SimpleSurvey
 
             context.Users.DeleteObject(user);
             context.SaveChanges();
-            Response.Redirect("ListUsers.aspx");
+            Response.Redirect("ListUsers.aspx?id=" + teacherid);
         }
 
         protected void BtnReset(Object sender, EventArgs e)

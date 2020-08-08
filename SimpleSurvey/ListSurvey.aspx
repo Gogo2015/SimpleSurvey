@@ -16,7 +16,7 @@
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
              <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditSurvey.aspx?ID={0}" DataTextField="ID" />
+                <asp:HyperLinkField DataNavigateUrlFields="ID,teacherid,classid" HeaderText="ID" DataNavigateUrlFormatString="EditSurvey.aspx?ID={0}&teacherid={1}&classid={2}" DataTextField="ID" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="Title" DataField="Title" />
@@ -29,6 +29,9 @@
             </Columns>
             <Columns>
                 <asp:BoundField HeaderText="Expires On" DataField="Expires On" />
+            </Columns>
+            <Columns>
+                <asp:BoundField HeaderText="Class" DataField="Class" />
             </Columns>
             <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
             <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />

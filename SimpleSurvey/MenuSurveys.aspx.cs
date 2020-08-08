@@ -11,19 +11,16 @@ namespace SimpleSurvey
     {
         SurveyAppConString context = new SurveyAppConString();
         int classid;
+        public int id;
+        public int surveyid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            id = Int32.Parse(Request.QueryString["ID"]);
+            ddlSurveys.Items.Clear();
             if (!IsPostBack)
             {
-                int id = Int32.Parse(Request.QueryString["ID"]);
+                
                 LoadClasses(id);
-            }
-            btnSubmit.Enabled = false;
-            if (ddlClasses.SelectedIndex >= 0)
-            {
-                classid = int.Parse(ddlClasses.SelectedValue);
-                PopulateSurveys();
             }
             /*
             foreach (Survey survey in context.Surveys)
@@ -33,13 +30,19 @@ namespace SimpleSurvey
             */
 
         }
+
+        protected void btnFind_Surveys(object sender, EventArgs e)
+        {
+            classid = int.Parse(ddlClasses.SelectedValue);
+            PopulateSurveys();
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                int id = Int32.Parse(ddlSurveys.SelectedItem.Value);
+                surveyid = Int32.Parse(ddlSurveys.SelectedItem.Value);
 
-                Response.Redirect("SurveyResponses.aspx?id=" + id);
+                Response.Redirect("SurveyResponses.aspx?id=" + id + "&surveyid=" + surveyid);
             }
         }
 
@@ -48,10 +51,10 @@ namespace SimpleSurvey
             var classQuery = from Class cl in context.Classes
                              where (cl.CreatedBy == id)
                              select cl;
-            ddlClasses.DataSource = classQuery;
+            ddlClasses.DataSource = classQuery.ToList();
             ddlClasses.DataTextField = "ClassName";
             ddlClasses.DataValueField = "ID";
-            ddlSurveys.DataBind();
+            ddlClasses.DataBind();
         }
 
         protected void PopulateSurveys()

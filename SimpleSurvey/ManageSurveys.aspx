@@ -95,8 +95,17 @@
         </tr>
         <tr>
             <td style="width: 25%; text-align: left;">
-                &nbsp;</td>
+        <asp:Label ID="LClass" runat="server" Text="Classes:"></asp:Label>
+        <div style ="margin-left: 120px">
+                        </div>
+                <br />
+                <br />
+            </td>
             <td>
+        <asp:CheckBoxList ID="ListClasses" runat="server">
+        </asp:CheckBoxList>
+                        <br />
+                <br />
                 <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
                     Text="Submit" />
                 <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
