@@ -23,6 +23,17 @@ title{
     margin: 0 auto;
 }
 
+.buttonright {
+    color: white;
+    background-color: #009fad;
+    border-color: #009fad;
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+    float: right;
+}
+
 
 
 

@@ -60,15 +60,6 @@ namespace SimpleSurvey
         protected global::System.Web.UI.WebControls.Button btnFindSurveys;
 
         /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-
-        /// <summary>
         /// ddlSurveys control.
         /// </summary>
         /// <remarks>
@@ -76,15 +67,6 @@ namespace SimpleSurvey
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSurveys;
-
-        /// <summary>
-        /// btnPopulateSurvey control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPopulateSurvey;
 
         /// <summary>
         /// pnlSurvey control.

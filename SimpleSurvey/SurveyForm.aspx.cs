@@ -14,33 +14,20 @@ namespace SimpleSurvey
         int surveyid;
         int id;
         int classid;
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             id = Int32.Parse(Request.QueryString["id"]);
             context = new SurveyAppConString();
             if (!IsPostBack)
                 LoadClasses();
-            
-        }
-        protected void PopulateSurveys()
-        {
-            var surveyQuery = from Survey s in context.Surveys
-                              where (s.Class == classid)
-                              select s;
-            foreach (Survey survey in surveyQuery)
-            {
-                ddlSurveys.Items.Add(new ListItem(survey.Title, survey.ID.ToString()));
-            }
-        }
-
-        protected void btnPopulate_Survey(Object sender, EventArgs e)
-        {
+            btnSubmit.Enabled = false;
             if (ddlSurveys.SelectedIndex >= 0)
             {
-                surveyid = Int32.Parse(ddlSurveys.SelectedValue);
+                surveyid = int.Parse(ddlSurveys.SelectedItem.Value);
                 PopulateSurvey();
             }
-            
         }
         private void LoadClasses()
         {
@@ -65,28 +52,27 @@ namespace SimpleSurvey
             if (ddlClasses.SelectedIndex >= 0)
             {
                 classid = int.Parse(ddlClasses.SelectedValue);
-                PopulateSurveys();
+                LoadSurveys();
             }
         }
             
         private void LoadSurveys()
         {
-            var classquery = from UserClass uc in context.UserClasses
-                             where (uc.UserID == id)
-                             select uc;
-            foreach (UserClass uc in classquery.ToList())
+            
+            var surveyquery = from Survey s in context.Surveys
+                               where (s.Class == classid)
+                               select s;
+            ddlSurveys.Items.Add(new ListItem());
+            foreach (Survey s in surveyquery.ToList())
             {
-                var surveyquery = from Survey s in context.Surveys
-                                  where (s.Class == uc.ClassID)
-                                  select s;
+                ListItem li = new ListItem();
+                li.Text = s.Title;
+                li.Value = s.ID.ToString();
+                ddlSurveys.Items.Add(li);
             }
-            List < Survey > surveys = context.Surveys.ToList();
-            ddlSurveys.DataSource = surveys;
-            ddlSurveys.DataTextField = "Title";
-            ddlSurveys.DataValueField = "ID";
             ddlSurveys.DataBind();
         }
-
+            
         protected void ddlSurveys_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -170,11 +156,11 @@ namespace SimpleSurvey
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Label2.Text = "hello";
             List<Survey_Response> response = GetSurveyReponse();
             foreach (Survey_Response sres in response)
                 context.AddToSurvey_Response(sres);
             context.SaveChanges();
+            Response.Redirect("AccountInfo.aspx?id=" + id);
         }
 
         protected void btn_Click_AccountInfo(object sender, EventArgs e)

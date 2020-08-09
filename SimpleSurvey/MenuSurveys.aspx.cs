@@ -16,11 +16,12 @@ namespace SimpleSurvey
         protected void Page_Load(object sender, EventArgs e)
         {
             id = Int32.Parse(Request.QueryString["ID"]);
-            ddlSurveys.Items.Clear();
+            
             if (!IsPostBack)
             {
                 
                 LoadClasses(id);
+                
             }
             /*
             foreach (Survey survey in context.Surveys)
@@ -34,6 +35,7 @@ namespace SimpleSurvey
         protected void btnFind_Surveys(object sender, EventArgs e)
         {
             classid = int.Parse(ddlClasses.SelectedValue);
+            ddlSurveys.Items.Clear();
             PopulateSurveys();
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -62,9 +64,13 @@ namespace SimpleSurvey
             var surveyQuery = from Survey s in context.Surveys
                               where (s.Class == classid)
                               select s;
+            ddlSurveys.Items.Add(new ListItem());
             foreach (Survey survey in surveyQuery)
             {
-                ddlSurveys.Items.Add(new ListItem(survey.Title, survey.ID.ToString()));
+                ListItem li = new ListItem();
+                li.Text = survey.Title;
+                li.Value = survey.ID.ToString();
+                ddlSurveys.Items.Add(li);
             }
         }
     }

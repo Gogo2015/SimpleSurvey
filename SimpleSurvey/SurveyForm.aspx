@@ -11,7 +11,7 @@
 <body>
     <form id="form1" runat="server">
     <div id="page-wrap">
-        <asp:Button ID="btnAccountInfo" CssClass="button1" runat="server" Text="ACCOUNT INFORMATION" onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
+        <asp:Button ID="btnAccountInfo" CssClass="buttonright" runat="server" Text="ACCOUNT INFORMATION"  onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
         <br />
         <asp:Label ID="Label2" runat="server" Text="Classes:"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -24,23 +24,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Button ID="btnFindSurveys" runat="server" Enabled="True" 
                         onclick="btnFind_Surveys" Text="Find" Width="61px" />
-                    <br />
-                    <br />
-                    <br />
-                    <asp:Label ID="Label3" runat="server" Text="Select Survey:"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:DropDownList ID="ddlSurveys" runat="server" AutoPostBack="True" 
-                        onselectedindexchanged="ddlSurveys_SelectedIndexChanged" Width="41%">
-                    </asp:DropDownList>
-                    <br />
-                    <br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="btnPopulateSurvey" runat="server" Enabled="True" 
-                        onclick="btnPopulate_Survey" Text="Fill Out" Width="61px" />
-                    <br />
-                
-        
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     
               
             <table cellpadding="2" class="style1">
@@ -52,9 +36,12 @@
             </tr>
             <tr>
                 <td style="width: 25%; text-align: left;">
-                    &nbsp;</td>
+                    Select Survey</td>
                 <td>
-                    &nbsp;</td>
+                    <asp:DropDownList ID="ddlSurveys" runat="server" AutoPostBack="True" 
+                        onselectedindexchanged="ddlSurveys_SelectedIndexChanged" Width="41%">
+                    </asp:DropDownList>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: left;">

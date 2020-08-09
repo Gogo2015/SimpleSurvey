@@ -8,20 +8,23 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:GridView ID="classView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="300px" AutoGenerateColumns="False">
+        <asp:GridView ID="classView" runat="server" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="200px" CellPadding="3" CellSpacing="2" Width="296px" AutoGenerateColumns="False" DataKeyNames="ClassID">
             <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
             <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="#8C4510" HorizontalAlign="Center" />
-             <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="ID" DataNavigateUrlFormatString="EditClass.aspx?ID={0}" DataTextField="ID" />
-            </Columns>
              <Columns>
                 <asp:BoundField HeaderText="Class Name" DataField="Class Name" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="Registration Code" DataField="Registration Code" />
             </Columns>
-            
+            <Columns>
+                <asp:TemplateField HeaderText ="Leave Class">
+                    <ItemTemplate>
+                        <asp:Button runat="server" Text="Leave Class" onclick ="click_LeaveClass" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
             <RowStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
             <SelectedRowStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
             <SortedAscendingCellStyle BackColor="#FFF1D4" />

@@ -71,8 +71,8 @@ namespace SimpleSurvey
                             newRow[2] = srv.UserName;
                             newRow[3] = null;
                             newRow[4] = srv.SurveyID;
-                            newRow[6] = srv.FilledBy;
-                            newRow[7] = "Incomplete";
+                            newRow[5] = srv.FilledBy;
+                            newRow[6] = "Incomplete";
                             
                             dt.Rows.Add(newRow);
                         }
