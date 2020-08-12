@@ -7,37 +7,49 @@
     <title>Take Survey</title>
     <link rel="stylesheet" href="StyleSheet.css" type="text/css" media="screen" runat="server" />
     
+    <style type="text/css">
+        .auto-style1 {
+            width: 25%;
+        }
+        .auto-style2 {
+            width: 489px;
+        }
+        .auto-style3 {
+            height: 28px;
+        }
+        .auto-style4 {
+            width: 489px;
+            height: 28px;
+        }
+    </style>
+    
     </head>
 <body>
     <form id="form1" runat="server">
     <div id="page-wrap">
-        <asp:Button ID="btnAccountInfo" CssClass="buttonright" runat="server" Text="ACCOUNT INFORMATION"  onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
+        <asp:Button ID="btnAccountInfo" CssClass="buttonredright" runat="server" Text="ACCOUNT INFORMATION"  onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Classes:"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
-                
-        <asp:DropDownList ID="ddlClasses" runat="server" Height="35px" Width="209px">
-        </asp:DropDownList>
-                    <br />
-                    <br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="btnFindSurveys" runat="server" Enabled="True" 
-                        onclick="btnFind_Surveys" Text="Find" Width="61px" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     
               
             <table cellpadding="2" class="style1">
             <tr>
-                <td style="width: 25%; text-align: left;">
-                    &nbsp;</td>
-                <td>
-                    &nbsp;</td>
+                <td style="text-align: left;" class="auto-style1">
+        <asp:Label CssClass="body" ID="Label2" runat="server" Text="Classes:" ForeColor="Black" Font-Size="Medium"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:DropDownList ID="ddlClasses" runat="server" Height="35px" Width="209px">
+        </asp:DropDownList>
+                    <br />
+                    <br />
+                    <asp:Button ID="btnFindSurveys" runat="server" Enabled="True" 
+                        onclick="btnFind_Surveys" CssClass="buttonred" Text="Find" Width="87px" />
+                    &nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
-                <td style="width: 25%; text-align: left;">
-                    Select Survey</td>
-                <td>
+                <td style="text-align: left; font-family: Georgia, sans-serif;" class="auto-style3">
+                    Select Survey:</td>
+                <td class="auto-style4">
                     <asp:DropDownList ID="ddlSurveys" runat="server" AutoPostBack="True" 
                         onselectedindexchanged="ddlSurveys_SelectedIndexChanged" Width="41%">
                     </asp:DropDownList>
@@ -45,18 +57,18 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: left;">
-                    <asp:Panel ID="pnlSurvey" runat="server">
+                    <asp:Panel ID="pnlSurvey" runat="server" Width="801px">
                     </asp:Panel>
                 </td>
             </tr>
             <tr>
-                <td style="width: 25%; text-align: left;">
+                <td style="text-align: left;" class="auto-style1">
                     &nbsp;</td>
-                <td>
-                    <asp:Button ID="btnSubmit" runat="server" Enabled="False" 
+                <td class="auto-style2">
+                    <asp:Button CssClass="buttonred" ID="btnSubmit" runat="server" Enabled="False" 
                         onclick="btnSubmit_Click" Text="Submit" />
-                    <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
-                        Text="Cancel" />
+                    &nbsp;<asp:Button CssClass="buttonred" ID="btnCancel" runat="server" CausesValidation="False" 
+                        Text="Cancel" onlick ="BtnCancel" />
                 </td>
             </tr>
         </table>

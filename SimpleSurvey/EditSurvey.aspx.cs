@@ -136,6 +136,10 @@ namespace SimpleSurvey
 
 
         }
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ListSurvey.aspx?id="+teacherid);
+        }
 
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {

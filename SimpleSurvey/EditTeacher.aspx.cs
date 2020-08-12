@@ -79,5 +79,10 @@ namespace SimpleSurvey
         {
             txtPassword.Text = "test";
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ListTeachers.aspx");
+        }
     }
 }

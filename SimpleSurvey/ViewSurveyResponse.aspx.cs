@@ -11,6 +11,7 @@ namespace SimpleSurvey
     public partial class ViewSurveyResponse : System.Web.UI.Page
     {
         SurveyAppConString context;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             context = new SurveyAppConString();
@@ -23,6 +24,7 @@ namespace SimpleSurvey
             SurveyAppConString context = new SurveyAppConString();
             int surveyID = Int32.Parse(Request.QueryString["surveyID"]);
             int filledBy = Int32.Parse(Request.QueryString["filledBy"]);
+            id = Int32.Parse(Request.QueryString["ID"]);
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("Question"));
             dt.Columns.Add(new DataColumn("Response"));
@@ -40,6 +42,11 @@ namespace SimpleSurvey
                 dt.Rows.Add(newRow);
             }
             return dt;
+        }
+
+        protected void btnReturn_Menu(Object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx?id=" + id);
         }
     }
 }

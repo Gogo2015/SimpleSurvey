@@ -40,6 +40,7 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("SurveyID"));
             dt.Columns.Add(new DataColumn("FilledBy"));
             dt.Columns.Add(new DataColumn("FilledSurvey"));
+            dt.Columns.Add(new DataColumn("teacherid"));
             
 
             DataRow newRow;
@@ -61,6 +62,7 @@ namespace SimpleSurvey
                             newRow[4] = srv.SurveyID;
                             newRow[5] = srv.FilledBy;
                             newRow[6] = "Completed";
+                            newRow[7] = id;
                             
                             dt.Rows.Add(newRow);
                         }
@@ -73,7 +75,8 @@ namespace SimpleSurvey
                             newRow[4] = srv.SurveyID;
                             newRow[5] = srv.FilledBy;
                             newRow[6] = "Incomplete";
-                            
+                            newRow[7] = id;
+
                             dt.Rows.Add(newRow);
                         }
                         userNames.Add(srv.UserName);

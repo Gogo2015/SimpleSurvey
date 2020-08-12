@@ -1,6 +1,11 @@
 ﻿body {
     font-family: Georgia, sans-serif;
 }
+
+whitebody {
+    font-size: 20px;
+} 
+
 .button1 {
     color: white;
     background-color: #009fad;
@@ -11,16 +16,100 @@
     font-family: Georgia, sans-serif;
 }
 
+.buttonnopadding {
+    color: white;
+    background-color: #009fad;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+    font-weight: bold;
+    border: none;
+}
+
+.tablerowwhite {
+    font-family: Georgia, sans-serif;
+    color: white;
+}
+
+#background {
+    background-color: #376fc0;
+}
+
+.button2 {
+    color: white;
+    background-color: #009fad;
+    border-color: #009fad;
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+}
+
+.buttonblueright {
+    color: white;
+    background-color: #009fad;
+    border-color: #009fad;
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+    float: right;
+}
+
 title{
     font-family: Georgia, sans-serif;
     display:block;
     font:bold;
     text-align: center;
 }
-
+#page-wrapblue {
+    width: 800px;
+    margin: 0 auto;
+    background-color: #376fc0;
+    padding: 50px;
+}
 #page-wrap {
     width: 1000px;
     margin: 0 auto;
+}
+
+#page-wrapaccount {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttonred {
+    background-color: #dd2b00;
+    color: white;
+    border-color: #dd2b00; 
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+}
+
+.buttonredtable {
+    background-color: #dd2b00;
+    color: white;
+    border-color: #dd2b00;
+    height: 30px;
+    width: 110px;
+    padding: 5px 10px 5px 10px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+}
+
+.buttonredright {
+    background-color: #dd2b00;
+    color: white;
+    border-color: #dd2b00;
+    padding: 5px 20px 5px 20px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: Georgia, sans-serif;
+    float: right;
 }
 
 .buttonright {
@@ -34,8 +123,27 @@ title{
     float: right;
 }
 
+.dropdownred {
+    color: white;
+}
 
+.dropdownred-content {
+    
+}
 
+.whiteradiobuttonlist {
+    color: white;
+
+}
+
+.Grid {
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    font-family: Calibri;
+    color: #474747;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 

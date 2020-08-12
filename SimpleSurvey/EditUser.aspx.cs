@@ -130,5 +130,10 @@ namespace SimpleSurvey
         {
             txtPassword.Text = "test";
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx?id="+id);
+        }
     }
 }

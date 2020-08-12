@@ -81,7 +81,10 @@ namespace SimpleSurvey
                 }
             }
         }
-
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ListUsers.aspx?id="+id);
+        }
         protected void btnReturn_Menu(Object sender, EventArgs e)
         {
             Response.Redirect("Menu.aspx?id="+id);

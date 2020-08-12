@@ -34,6 +34,7 @@ namespace SimpleSurvey
             var userClassQuery = from UserClass uc in context.UserClasses
                              where (uc.UserID == id)
                              select uc;
+            ddlClasses.Items.Add(new ListItem());
             foreach (UserClass uc in userClassQuery.ToList())
             {
                 var classquery = from Class c in context.Classes
@@ -98,6 +99,7 @@ namespace SimpleSurvey
             {
                 tr = new TableRow();
                 tc = new TableCell();
+                //tc.Style["color"] = "#FFFFFF";
                 tc.Width = Unit.Percentage(25);
                 tc.Text = q.Text;
                 tc.Attributes.Add("id", q.ID.ToString());
@@ -140,6 +142,7 @@ namespace SimpleSurvey
                     rbl = new RadioButtonList();
                     rbl.ID = "rbl_" + q.ID;
                     rbl.Width = Unit.Percentage(41);
+                    //rbl.Style["color"] = "#FFFFFF";
                     if (!string.IsNullOrEmpty(q.Options))
                     {
                         string[] values = q.Options.Split(',');
@@ -161,6 +164,11 @@ namespace SimpleSurvey
                 context.AddToSurvey_Response(sres);
             context.SaveChanges();
             Response.Redirect("AccountInfo.aspx?id=" + id);
+        }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("LoginPage.aspx");
         }
 
         protected void btn_Click_AccountInfo(object sender, EventArgs e)

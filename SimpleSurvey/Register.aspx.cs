@@ -69,5 +69,10 @@ namespace SimpleSurvey
                 txtErrorUser.Text = "Username Too Short";
             }
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
     }
 }

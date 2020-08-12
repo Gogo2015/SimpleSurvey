@@ -31,5 +31,10 @@ namespace SimpleSurvey
                 Response.Redirect("ViewClasses.aspx?id=" + id);
             }
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewClasses.aspx?id="+id);
+        }
     }
 }

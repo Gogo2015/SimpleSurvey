@@ -41,5 +41,10 @@ namespace SimpleSurvey
         {
             Response.Redirect("Menu.aspx?id="+id);
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ListTeachers.aspx");
+        }
     }
 }

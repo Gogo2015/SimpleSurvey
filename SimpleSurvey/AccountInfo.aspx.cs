@@ -25,12 +25,12 @@ namespace SimpleSurvey
 
         }
 
-        protected void btnReturn_Menu(Object sender, EventArgs e)
+        protected void BtnReturn_Menu(Object sender, EventArgs e)
         {
             Response.Redirect("Menu.aspx?id=" + id);
         }
 
-        protected void click_LeaveClass(Object sender, EventArgs e)
+        protected void Click_LeaveClass(Object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
@@ -97,6 +97,16 @@ namespace SimpleSurvey
         protected void Take_Survey(object sender, EventArgs e)
         {
             Response.Redirect("SurveyForm.aspx?id=" + id);
+        }
+
+        protected void classView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Btn_ClickLogout(object sender, EventArgs e)
+        {
+            Response.Redirect("Logout.aspx");
         }
     }
 }

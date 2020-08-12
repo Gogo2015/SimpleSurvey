@@ -88,5 +88,10 @@ namespace SimpleSurvey
 
             
         }
+
+        protected void BtnCancel(object sender, EventArgs e)
+        {
+            Response.Redirect("ListQuestions.aspx?id="+id);
+        }
     }
 }
