@@ -15,26 +15,33 @@ namespace SimpleSurvey
         int id;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Int32.Parse(Request.QueryString["id"]);
-            ddlClasses.DataSource = GetClasses();
-            ddlClasses.DataTextField = "ClassName";
-            ddlClasses.DataValueField = "ID";
-            ddlClasses.DataBind();
+            if (!IsPostBack)
+            {
+                id = Int32.Parse(Request.QueryString["id"]);
+                GetClasses();
+            }
         }
 
-        protected List<Class> GetClasses()
+        protected void GetClasses()
         {
             var classQuery = from Class c in context.Classes
                              where (c.CreatedBy == id)
                              select c;
-            return classQuery.ToList();
+            foreach (Class c in classQuery.ToList())
+            {
+                ListItem li = new ListItem();
+                li.Text = c.ClassName;
+                li.Value = c.ID.ToString();
+                ddlClasses.Items.Add(li);
+            }
+            ddlClasses.DataBind();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (ddlClasses.SelectedValue != null)
             {
-                Response.Redirect("ListUsers.aspx?id=" + id + "&class=" + ddlClasses.SelectedValue);
+                Response.Redirect("ListUsers.aspx?id=" + id + "&class=" + ddlClasses.SelectedItem.Value);
             }
         }
     }

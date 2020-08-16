@@ -27,7 +27,7 @@
 <body>
     <form id="form1" runat="server">
     <div id="page-wrap">
-        <asp:Button ID="btnAccountInfo" CssClass="buttonredright" runat="server" Text="ACCOUNT INFORMATION"  onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
+        <asp:Button ID="btnAccountInfo" CssClass="buttonblueright" runat="server" Text="ACCOUNT INFORMATION"  onclick ="btn_Click_AccountInfo" Height="31px" Width="281px" />
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     
@@ -43,7 +43,7 @@
                     <br />
                     <br />
                     <asp:Button ID="btnFindSurveys" runat="server" Enabled="True" 
-                        onclick="btnFind_Surveys" CssClass="buttonred" Text="Find" Width="87px" />
+                        onclick="btnFind_Surveys" CssClass="button1" Text="Find" Width="87px" />
                     &nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
@@ -65,9 +65,9 @@
                 <td style="text-align: left;" class="auto-style1">
                     &nbsp;</td>
                 <td class="auto-style2">
-                    <asp:Button CssClass="buttonred" ID="btnSubmit" runat="server" Enabled="False" 
+                    <asp:Button CssClass="button1" ID="btnSubmit" runat="server" Enabled="False" 
                         onclick="btnSubmit_Click" Text="Submit" />
-                    &nbsp;<asp:Button CssClass="buttonred" ID="btnCancel" runat="server" CausesValidation="False" 
+                    &nbsp;<asp:Button CssClass="button1" ID="btnCancel" runat="server" CausesValidation="False" 
                         Text="Cancel" onlick ="BtnCancel" />
                 </td>
             </tr>
