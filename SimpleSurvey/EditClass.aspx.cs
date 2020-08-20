@@ -11,17 +11,19 @@ namespace SimpleSurvey
     {
         Class c;
         SurveyAppConString context = new SurveyAppConString();
-        public int id;
+        public int classid;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             
             // get the user id
+            classid = Int32.Parse(Request.QueryString["classid"]);
             id = Int32.Parse(Request.QueryString["ID"]);
 
             if (!Page.IsPostBack)
             {
                 var classQuery = from cl in context.Classes
-                            where (cl.ID == id)
+                            where (cl.ID == classid)
                             select cl;
 
                 c = classQuery.First<Class>();
@@ -36,7 +38,7 @@ namespace SimpleSurvey
 
 
             var queryF = from cl in context.Classes
-                        where (cl.ID == id)
+                        where (cl.ID == classid)
                         select cl;
 
             c = queryF.First<Class>();
@@ -56,7 +58,7 @@ namespace SimpleSurvey
         protected void BtnDelete(Object sender, EventArgs e)
         {
             var query = from cl in context.Classes
-                        where (cl.ID == id)
+                        where (cl.ID == classid)
                         select cl;
 
             c = query.First<Class>();

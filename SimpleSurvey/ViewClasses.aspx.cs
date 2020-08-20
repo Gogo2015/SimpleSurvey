@@ -31,6 +31,7 @@ namespace SimpleSurvey
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("Class Name"));
             dt.Columns.Add(new DataColumn("Registration Code"));
+            dt.Columns.Add(new DataColumn("ClassID"));
             dt.Columns.Add(new DataColumn("ID"));
 
             var classquery = from Class c in context.Classes
@@ -46,6 +47,7 @@ namespace SimpleSurvey
                     newRow[0] = c.ClassName;
                     newRow[1] = c.RegistrationCode;
                     newRow[2] = c.ID;
+                    newRow[3] = id;
                     dt.Rows.Add(newRow);
                 }
             }

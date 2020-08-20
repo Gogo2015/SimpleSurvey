@@ -13,11 +13,13 @@ namespace SimpleSurvey
     {
         Question question;
         SurveyAppConString context = new SurveyAppConString();
-        public int id;
+        public int questionid;
+        int id;
         protected void Page_Load(object sender, EventArgs e)
         {
             // get the question id
             id = Int32.Parse(Request.QueryString["ID"]);
+            questionid = Int32.Parse(Request.QueryString["questionid"]);
             if (!Page.IsPostBack)
             {
                 ddlTypes.Items.Add(QuestionTypes.SingleLineTextBox.ToString());
@@ -29,7 +31,7 @@ namespace SimpleSurvey
 
 
                 var query = from q in context.Questions
-                            where (q.ID == id)
+                            where (q.ID == questionid)
                             select q;
 
                 question = query.First<Question>();
@@ -48,7 +50,7 @@ namespace SimpleSurvey
 
 
             var query = from q in context.Questions
-                        where (q.ID == id)
+                        where (q.ID == questionid)
                         select q;
 
             question = query.First<Question>();
@@ -71,7 +73,7 @@ namespace SimpleSurvey
         protected void btnDelete_Click(Object sender, EventArgs e)
         {
             var query = from q in context.Questions
-                        where (q.ID == id)
+                        where (q.ID == questionid)
                         select q;
 
             question = query.First<Question>();

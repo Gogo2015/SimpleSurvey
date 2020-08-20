@@ -34,6 +34,7 @@ namespace SimpleSurvey
             dt.Columns.Add(new DataColumn("Question"));
             dt.Columns.Add(new DataColumn("Question Type"));
             dt.Columns.Add(new DataColumn("Answer Choices"));
+            dt.Columns.Add(new DataColumn("QuestionID"));
             dt.Columns.Add(new DataColumn("ID"));
 
             DataRow newRow;
@@ -47,6 +48,7 @@ namespace SimpleSurvey
                     newRow[1] = q.QuestionType;
                     newRow[2] = q.Options;
                     newRow[3] = q.ID;
+                    newRow[4] = id;
                     dt.Rows.Add(newRow);
                 }
             }

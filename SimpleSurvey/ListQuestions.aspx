@@ -16,7 +16,7 @@
             <HeaderStyle BackColor="#1b365d" Font-Bold="True" ForeColor="White" />
             <PagerStyle ForeColor="Black" HorizontalAlign="Center" />
              <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="ID" HeaderText="Edit Question" DataNavigateUrlFormatString="EditQuestions.aspx?ID={0}" DataTextField="ID" />
+                <asp:HyperLinkField DataNavigateUrlFields="QuestionID, ID" HeaderText="Edit Question" DataNavigateUrlFormatString="EditQuestions.aspx?questionid={0}&ID={1}" DataTextField="QuestionID" />
             </Columns>
              <Columns>
                 <asp:BoundField HeaderText="Question" DataField="Question" />
